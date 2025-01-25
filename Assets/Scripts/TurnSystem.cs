@@ -8,14 +8,13 @@ namespace Hmlca.Untitled
     // State machine of the current battle
     public class TurnSystem : Singleton<TurnSystem>
     {
-        public enum TurnController { PLAYER, ENEMY, TUTORIAL }
-        public class Turn
-        {
-            public TurnController controller;
-        }
-        
-        
         public List<Turn> turnQueue = new List<Turn>();
+
+
+        public void ResetTurnQueue()
+        {
+            turnQueue.Clear();
+        }
 
 
         public void PushTurn(Turn turn, bool toTopOfQueue = false)

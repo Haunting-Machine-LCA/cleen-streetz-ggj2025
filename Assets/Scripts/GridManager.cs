@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class GridManager : MonoBehaviour
+    public class GridManager : Singleton<GridManager>
     {
         private Grid<GridNode> grid;
         public int width = 5, height = 3, depth = 5;
