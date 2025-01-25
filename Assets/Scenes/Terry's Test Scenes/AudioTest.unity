@@ -341,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1699460400}
+  - component: {fileID: 1699460401}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -363,6 +364,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1699460401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699460399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb859add19bb9514386187fa8f45fb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 8300000, guid: 7bc91578cc69a5a4692a16695d6f6ffb, type: 3}
+  gameMusic: {fileID: 8300000, guid: d96f64d1a2703b74dbcf674c7a03df52, type: 3}
+  backSFX: {fileID: 8300000, guid: f2b782564b436a647879cd507a620a65, type: 3}
+  navSFX: {fileID: 8300000, guid: f0fb515fb49747643ab9341e11cd3c27, type: 3}
+  selectSFX: {fileID: 8300000, guid: be63f5b4067d88542b97eb9985c03946, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
