@@ -22,6 +22,9 @@ namespace Hmlca.Untitled
         private Transform blockersParent;
 
 
+        public Grid<GridNode> Grid => grid;
+
+
         // Start is called before the first frame update
         void Start()
         {

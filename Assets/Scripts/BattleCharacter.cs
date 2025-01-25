@@ -28,7 +28,7 @@ namespace Hmlca.Untitled
             const int ARMOR = 1;
             const int ATTACK = 10;
             return new BattleCharacter(
-                Resources.Load<GameObject>("Prefabs/Player"), 
+                Resources.Load<GameObject>("Player"), 
                 HEALTH, 
                 ARMOR, 
                 ATTACK
@@ -42,7 +42,7 @@ namespace Hmlca.Untitled
             const int ARMOR = 1;
             const int ATTACK = 10;
             return new BattleCharacter(
-                Resources.Load<GameObject>("Prefabs/Player"),
+                Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
                 ATTACK
@@ -56,7 +56,7 @@ namespace Hmlca.Untitled
             const int ARMOR = 1;
             const int ATTACK = 10;
             return new BattleCharacter(
-                Resources.Load<GameObject>("Prefabs/Player"),
+                Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
                 ATTACK
@@ -70,7 +70,7 @@ namespace Hmlca.Untitled
             const int ARMOR = 1;
             const int ATTACK = 10;
             return new BattleCharacter(
-                Resources.Load<GameObject>("Prefabs/Player"),
+                Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
                 ATTACK
