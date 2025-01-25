@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class PlayerAnimations : MonoBehaviour
+    public class CharacterAnimations : MonoBehaviour
     {
         private Animator anim;
 
