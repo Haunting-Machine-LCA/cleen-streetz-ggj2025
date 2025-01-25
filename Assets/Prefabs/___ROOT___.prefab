@@ -825,3 +825,6 @@ MonoBehaviour:
       m_Calls: []
   state: 0
   player: {fileID: 0}
+  gridParent: {fileID: 2079993646459527953}
+  gridPrefab: {fileID: 5782631939036318316, guid: f55ed17c9de47d24899d0a80cd40bfa2,
+    type: 3}

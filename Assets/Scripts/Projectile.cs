@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class Projectile
+    public class Projectile : GridEntity
     {
         public int attackModifier;
         public int armorPenetration;

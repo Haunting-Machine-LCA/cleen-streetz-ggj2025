@@ -11,14 +11,16 @@ namespace Hmlca.Untitled
         public int health;
         public int armor;
         public int attack;
-    
-    
-        public BattleCharacter(GameObject prefab, int health, int armor, int attack)
+        public TurnController turnController;
+
+
+        public BattleCharacter(GameObject prefab, int health, int armor, int attack, TurnController turnController)
         {
             this.prefab = prefab;
             this.health = health;
             this.armor = armor;
             this.attack = attack;
+            this.turnController = turnController;
         }
 
 
@@ -31,7 +33,8 @@ namespace Hmlca.Untitled
                 Resources.Load<GameObject>("Player"), 
                 HEALTH, 
                 ARMOR, 
-                ATTACK
+                ATTACK,
+                TurnController.PLAYER
             );
         }
 
@@ -45,7 +48,8 @@ namespace Hmlca.Untitled
                 Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
-                ATTACK
+                ATTACK,
+                TurnController.ENEMY
             );
         }
 
@@ -59,7 +63,8 @@ namespace Hmlca.Untitled
                 Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
-                ATTACK
+                ATTACK,
+                TurnController.ENEMY
             );
         }
 
@@ -73,7 +78,8 @@ namespace Hmlca.Untitled
                 Resources.Load<GameObject>("Player"),
                 HEALTH,
                 ARMOR,
-                ATTACK
+                ATTACK,
+                TurnController.ENEMY
             );
         }
 
