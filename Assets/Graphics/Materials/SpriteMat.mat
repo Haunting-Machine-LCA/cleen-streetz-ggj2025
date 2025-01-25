@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SpriteMat
-  m_Shader: {fileID: -6465566751694194690, guid: 0a05261f57057854d9be4e6f40fe1c3c,
+  m_Shader: {fileID: -6465566751694194690, guid: 51059c85ae91a764280ccfbf1ac18f07,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -69,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpriteTexture:
-        m_Texture: {fileID: 2800000, guid: 09f36f0ed2d6d79498225f77061f1af3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7cccddcc7d2fc0344a5343dc9b815228, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
