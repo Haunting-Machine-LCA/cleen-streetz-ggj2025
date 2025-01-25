@@ -66,7 +66,7 @@ namespace Hmlca.Untitled
             return default;
         }
 
-        private bool IsValidGridPosition(int x, int y, int z)
+        public bool IsValidGridPosition(int x, int y, int z)
         {
             return x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth;
         }
