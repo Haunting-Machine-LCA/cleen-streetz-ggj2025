@@ -19,21 +19,16 @@ namespace Hmlca.Untitled
 
 
         [SerializeField] private Queue<BattleCharacter> battleCharacters = new Queue<BattleCharacter>();
-        private BattleState state = BattleState.SETUP;
+        [SerializeField] private BattleState state;
+        [SerializeField] private GameObject player;
 
 
         public void ResetBattle()
         {
+            print("resetting battle");
             state = BattleState.SETUP;
-            battleCharacters.Enqueue(
-                new BattleCharacter
-                {
-                    prefab = Resources.Load<GameObject>("Prefabs/Player"),
-                    health = 100,
-                    armor = 10,
-                    attack = 10
-                }
-            );
+            //player = BattleCharacter.Player().Spawn();
+            //battleCharacters.Enqueue();
         }
     }
 }
