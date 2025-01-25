@@ -1,7 +1,9 @@
 {
     "name": "Hmlca.Untitled",
     "rootNamespace": "Hmlca.Untitled",
-    "references": [],
+    "references": [
+        "GUID:fd228c28e14f1a34cbe508676c914dd7"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
