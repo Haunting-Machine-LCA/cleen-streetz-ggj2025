@@ -5,7 +5,7 @@ using UnityEngine;
 using Optional;
 
 
-namespace Hmlca.Medstrat
+namespace Hmlca.Untitled
 {
     public class Singleton : MonoBehaviour
     {
