@@ -41,8 +41,8 @@ namespace Hmlca.Untitled
 
                 // Choose spot to spawn
                 bool validPos = false;
-                int xCoord;
-                int yCoord;
+                int xCoord = 0;
+                int yCoord = 0;
                 while (!validPos)
                 {
                     // Spawn characters on the sidewalk only
@@ -56,7 +56,7 @@ namespace Hmlca.Untitled
                         validPos = true;
                 }
 
-                Vector3Int gridPos = new Vector3Int(, 1, 0);
+                Vector3Int gridPos = new Vector3Int(xCoord, 1, yCoord);
                 gridManager.PlaceObject(gameObject, gridPos);
                 battlerGOs.Add(gameObject);
             }
