@@ -13,6 +13,7 @@ namespace Hmlca.Untitled
         private int height = 3;
         private float cellSize = 1f;
         public GameObject groundPrefab;
+        public Material sidewalkMat;
         public Material[] concreteMats;
         public Material[] buildingMats;
         public int num1x1Blockers = 3;
@@ -53,8 +54,17 @@ namespace Hmlca.Untitled
                 for (int z=0; z<depth; z++)
                 {
                     Vector3 worldPos = grid.GetWorldPosition(x, 0, z);
-                    Material randomConcreteMat = concreteMats[Random.Range(0, concreteMats.Length)]; // Choose a random concrete texture
-                    groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = randomConcreteMat;
+
+                    if (x == 0 || x == width - 1 || z == 0 || z == depth - 1)
+                    {
+                        groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = sidewalkMat; // Edge blocks are sidewalks
+                    }
+                    else
+                    {
+                        Material randomConcreteMat = concreteMats[Random.Range(0, concreteMats.Length)]; // Choose a random concrete texture
+                        groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = randomConcreteMat;
+                    }
+                    
                     var thisObj = PlaceObject(worldPos, groundPrefab);
                     thisObj.transform.parent = groundParent;
                 }
