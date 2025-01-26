@@ -93,7 +93,7 @@ namespace Hmlca.Untitled
                         groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = randomConcreteMat;
                     }
                     
-                    var thisObj = PlaceObject(worldPos, groundPrefab);
+                    var thisObj = PlaceObject(groundPrefab, Vector3Int.FloorToInt(worldPos));
                     thisObj.transform.parent = groundParent;
                 }
             }
@@ -105,7 +105,7 @@ namespace Hmlca.Untitled
                 // Choose random object
                 GameObject obj = blockerPrefabs_1x1[Random.Range(0, blockerPrefabs_1x1.Length)];
                 // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
+                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
                 Grid.GetGridPosition(pos, out var x, out var y, out var z);
                 var gridPos = new Vector3Int(x, z);
                 // Place
@@ -135,7 +135,7 @@ namespace Hmlca.Untitled
                 while (!posFound)
                 {
                     // Choose random position on ground
-                    pos1 = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
+                    pos1 = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
 
                     // Get the secondary position based on rotation
                     switch (rotation)
@@ -186,7 +186,7 @@ namespace Hmlca.Untitled
                 // Choose random object
                 GameObject obj = blockerPrefabs_1x2[Random.Range(0, blockerPrefabs_1x2.Length)];
                 // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
+                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
                 // Place
                 Grid.GetGridPosition(pos, out Vector3Int gridPos);
                 var thisObj = PlaceObject(obj, gridPos);
@@ -205,7 +205,7 @@ namespace Hmlca.Untitled
                 // Choose random object
                 GameObject obj = blockerPrefabs_1x3[Random.Range(0, blockerPrefabs_1x3.Length)];
                 // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
+                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
                 // Place
                 Grid.GetGridPosition(pos, out Vector3Int gridPos);
                 var thisObj = PlaceObject(obj, gridPos);
