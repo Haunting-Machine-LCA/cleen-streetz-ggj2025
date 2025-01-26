@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb859add19bb9514386187fa8f45fb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic: {fileID: 8300000, guid: 7bc91578cc69a5a4692a16695d6f6ffb, type: 3}
+  menuMusic: {fileID: 8300000, guid: e0fafe9fda1f5b341a468059deb65031, type: 3}
   gameMusic: {fileID: 8300000, guid: d96f64d1a2703b74dbcf674c7a03df52, type: 3}
   hmSFX: {fileID: 8300000, guid: 7bc91578cc69a5a4692a16695d6f6ffb, type: 3}
   backSFX: {fileID: 8300000, guid: f2b782564b436a647879cd507a620a65, type: 3}

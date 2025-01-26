@@ -10,6 +10,8 @@ namespace Hmlca.Untitled
     {
         private UIDocument uiDoc;
         private VisualElement fadeScreen;
+        private float duration = 1f;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -25,6 +27,9 @@ namespace Hmlca.Untitled
             fadeScreen.style.height = Length.Percent(100);
             fadeScreen.style.display = DisplayStyle.None;
             root.Add(fadeScreen);
+
+            StartCoroutine(FadeIn());
+            
         }
 
         public void LoadScene(string sceneName)
@@ -34,10 +39,6 @@ namespace Hmlca.Untitled
 
         private IEnumerator FadeAndLoad(string sceneName)
         {
-            float duration = 1f;
-
-            // Fade out music
-
             // Fade out view
             fadeScreen.style.display = DisplayStyle.Flex;
             for (float t=0; t < duration; t+=Time.deltaTime)
@@ -47,6 +48,18 @@ namespace Hmlca.Untitled
             }
 
             SceneManager.LoadScene(sceneName);
+        }
+
+        private IEnumerator FadeIn()
+        {
+            // Fade in view
+            fadeScreen.style.display = DisplayStyle.Flex;
+            for (float t=duration; t > 0; t-=Time.deltaTime)
+            {
+                fadeScreen.style.backgroundColor = new Color(0, 0, 0, t / duration);
+                yield return null;
+            }
+            fadeScreen.style.display = DisplayStyle.None;
         }
     }
 }

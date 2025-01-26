@@ -6,6 +6,7 @@ namespace Hmlca.Untitled
 {
     public class AudioManager : MonoBehaviour
     {
+        public static AudioManager Instance;
         public AudioClip menuMusic;
         public AudioClip gameMusic;
 
@@ -18,6 +19,12 @@ namespace Hmlca.Untitled
 
         void Awake()
         {
+            // Make it a singleton
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this.gameObject);
+
             DontDestroyOnLoad(gameObject); // Keep playing across scenes
 
             // Create component
@@ -31,6 +38,12 @@ namespace Hmlca.Untitled
 
             // Start on menu
             audioSource.clip = menuMusic;
+        }
+
+        void Start()
+        {
+            // PlayHMSFX();
+            StartMainMenuMusic();
         }
 
         void Update()
@@ -68,7 +81,7 @@ namespace Hmlca.Untitled
 
         public void PlaySelectSFX()
         {
-            PlaySFX(navSFX);
+            PlaySFX(selectSFX);
         }
 
         public void PlayHMSFX()
@@ -81,7 +94,12 @@ namespace Hmlca.Untitled
             sfxSource.PlayOneShot(clip);
         }
 
-        public void CrossfadeMusic(AudioClip newClip, float fadeDuration = 1.5f)
+        public void ToGameMusic()
+        {
+            CrossfadeMusic(gameMusic);
+        }
+
+        private void CrossfadeMusic(AudioClip newClip, float fadeDuration = 1.5f)
         {
             StartCoroutine(FadeMusic(newClip, fadeDuration));
         }

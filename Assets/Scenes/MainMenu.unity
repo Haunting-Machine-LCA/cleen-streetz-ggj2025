@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 1005538532819654685, guid: fee16b9fd9194384a8413374e80e7029,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1743813736002358164, guid: fee16b9fd9194384a8413374e80e7029,
         type: 3}
@@ -508,81 +508,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1812148164
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1812148166}
-  - component: {fileID: 1812148165}
-  - component: {fileID: 1812148167}
-  - component: {fileID: 1812148168}
-  m_Layer: 0
-  m_Name: MainMenu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1812148165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812148164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 80f0bd9ad2eaf134898de2b0d2b38291, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: caee5b0254cc5b245b7272a9f05c1322,
-    type: 3}
-  m_SortingOrder: 0
---- !u!4 &1812148166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812148164}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 166.90637, y: -56.205536, z: 953.81433}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812148167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812148164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d448efa53b8da4ab5f43432b6af2e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1812148168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812148164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ab1a264d6d5c24e8b2bb714c6fafdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1825740357
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +616,7 @@ PrefabInstance:
     - target: {fileID: 4367031420860913113, guid: 2869c8c6d17e76645998927b4fad58a7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8063613830667440752, guid: 2869c8c6d17e76645998927b4fad58a7,
         type: 3}
@@ -756,4 +681,3 @@ SceneRoots:
   - {fileID: 978009099}
   - {fileID: 217941201}
   - {fileID: 2024557929}
-  - {fileID: 1812148166}
