@@ -7,10 +7,16 @@ namespace Hmlca.Untitled
 {
     public abstract class GridEntity : MonoBehaviour
     {
+        [Header("Callbacks")]
         public UnityEvent<Vector3Int> OnGridPositionChanged = new UnityEvent<Vector3Int>();
+        public UnityEvent OnDestroyed = new UnityEvent();
+        [Header("Movement")]
         public int speed;
         public int xVelocity;
         public int yVelocity;
+        protected bool isQuitting;
+        [Header("Transform")]
+        [SerializeField] private int yOffset;
         [SerializeField] private Vector3Int gridPosition;
         private GridManager gm;
 
@@ -18,6 +24,7 @@ namespace Hmlca.Untitled
         protected virtual void Awake()
         {
             gm = GridManager.GetSingleton();
+            Application.quitting += () => isQuitting = true;
         }
 
 
@@ -55,13 +62,16 @@ namespace Hmlca.Untitled
             int z = gridPosition.z;
             var worldPosition = gm.Grid
                 .GetWorldPosition(x, y, z);
+            worldPosition.y += yOffset;
             transform.position = worldPosition;
         }
 
 
         protected virtual void OnDestroy()
         {
-            BattleSystem.GetSingleton().UnregisterGameObject(gameObject);
+            OnDestroyed?.Invoke();
+            if (!isQuitting)
+                BattleSystem.GetSingleton().UnregisterGameObject(gameObject);
         }
     }
 }

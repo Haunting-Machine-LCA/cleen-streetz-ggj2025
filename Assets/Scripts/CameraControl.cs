@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Hmlca.Untitled
 {
-    public class CameraControl : MonoBehaviour
+    public class CameraControl : Singleton<CameraControl>
     {
         public Vector3 offset = new Vector3(10, 10, 10);
         public Transform target;

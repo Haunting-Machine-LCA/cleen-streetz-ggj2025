@@ -185,17 +185,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ___ROOT___
       objectReference: {fileID: 0}
-    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
-        type: 3}
-      propertyPath: gridPrefab
-      value: 
-      objectReference: {fileID: 5531474303728547167, guid: 2689cd6a764e5b14ea20f72458fbcbde,
-        type: 3}
-    - target: {fileID: 6790438287107248787, guid: 868778f971f68ce43ae23cea3e5e12ed,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

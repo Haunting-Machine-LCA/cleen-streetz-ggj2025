@@ -16,7 +16,8 @@ namespace Hmlca.Untitled
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            BattleSystem.GetSingleton().UnregisterBattler(this);
+            if (!isQuitting)
+                BattleSystem.GetSingleton().UnregisterBattler(this);
         }
 
 
