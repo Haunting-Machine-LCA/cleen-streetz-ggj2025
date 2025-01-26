@@ -25,9 +25,9 @@ namespace Hmlca.Untitled
         {
             print("resetting battle");
             state = BattleState.SETUP;
+            ResetGrid();
             ResetPlayer();
             ResetBattleObjects();
-            ResetGrid();
             battles.Enqueue(
                 BattleCharacter.Enemy1());
             battles.Enqueue(

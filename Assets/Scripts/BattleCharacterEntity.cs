@@ -18,5 +18,11 @@ namespace Hmlca.Untitled
             base.OnDestroy();
             BattleSystem.GetSingleton().UnregisterBattler(this);
         }
+
+
+        public void SetCharacter(BattleCharacter character)
+        {
+
+        }
     }
 }

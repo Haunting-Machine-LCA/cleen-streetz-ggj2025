@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Hmlca.Untitled
 {
     public abstract class GridEntity : MonoBehaviour
     {
+        public UnityEvent<Vector3Int> OnGridPositionChanged = new UnityEvent<Vector3Int>();
+        public int speed;
+        public int xVelocity;
+        public int yVelocity;
         [SerializeField] private Vector3Int gridPosition;
 
 
         protected virtual void Start()
         {
             BattleSystem.GetSingleton().RegisterGameObject(gameObject);
-        }
-
-
-        protected virtual void OnEnable()
-        {
             SetGridPosition(gridPosition);
             int x = gridPosition.x;
             int y = gridPosition.y;

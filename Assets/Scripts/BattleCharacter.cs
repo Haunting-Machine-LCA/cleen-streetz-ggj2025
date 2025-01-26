@@ -87,6 +87,7 @@ namespace Hmlca.Untitled
         public GameObject Spawn()
         {
             gameObject = GameObject.Instantiate(prefab);
+            gameObject.SendMessage("SetCharacter", this);
             return gameObject;
         }
     }

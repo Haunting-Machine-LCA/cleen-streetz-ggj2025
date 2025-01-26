@@ -31,10 +31,16 @@ namespace Hmlca.Untitled
         public Grid<GridNode> Grid => grid;
 
 
+        protected override void Awake()
+        {
+            base.Awake();
+            grid = new Grid<GridNode>(width, height, depth, cellSize, Vector3.zero, (g, x, y, z) => new GridNode(x, y, z));
+        }
+
+
         // Start is called before the first frame update
         void Start()
         {
-            grid = new Grid<GridNode>(width, height, depth, cellSize, Vector3.zero, (g, x, y, z) => new GridNode(x, y, z));
             gridPiecesParent = transform.Find("GridPieces");
             groundParent = gridPiecesParent.Find("Ground");
             blockersParent = gridPiecesParent.Find("Blockers");

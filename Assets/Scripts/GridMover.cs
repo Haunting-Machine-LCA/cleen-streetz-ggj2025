@@ -12,7 +12,7 @@ namespace Hmlca.Untitled
 
         public bool TryMove(Vector3Int direction)
         {
-            
+            return true;
         }
     }
 }
