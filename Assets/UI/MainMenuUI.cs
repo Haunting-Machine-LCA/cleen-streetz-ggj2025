@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Hmlca.Untitled;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,6 +13,7 @@ public class MainMenuUI : MonoBehaviour
     private AudioManager am;
     private VisualElement instructionsScrn, optionsScrn;
     private Button backBtn1, backBtn2;
+    private VisualElement backgroundImg, colorOverlay;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,10 @@ public class MainMenuUI : MonoBehaviour
         optionsScrn = root.Q("Options");
         backBtn1 = root.Q("BackBtn1") as Button;
         backBtn2 = root.Q("BackBtn2") as Button;
+        backgroundImg = root.Q("BackgroundImg");
+        colorOverlay = root.Q("ColorOverlay");
+
+        StartCoroutine(BGLoopMove());
 
         foreach (Button btn in new Button[]{playBtn, instructionsBtn, optionsBtn, quitBtn, backBtn1, backBtn2})
         {
@@ -70,9 +76,32 @@ public class MainMenuUI : MonoBehaviour
         Application.Quit();
     }
 
-
     private void OnHover(PointerOverEvent evt)
     {
         am.PlayNavSFX();
+    }
+
+    private IEnumerator BGLoopMove()
+    {
+        while (true)
+        {
+            Vector3 oldPos = backgroundImg.transform.position;
+            Vector3 newPos = new Vector3(Random.Range(-30, 30), Random.Range(-30, 30), 0);
+            yield return MoveElement(backgroundImg, oldPos, newPos, Random.Range(0, 10));
+            yield return MoveElement(backgroundImg, newPos, oldPos, Random.Range(0, 10));
+        }
+    }
+
+    private IEnumerator MoveElement(VisualElement ve, Vector3 start, Vector3 end, float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float step = time / duration;
+            Translate newTranslate = new Translate(Mathf.Lerp(start.x, end.x, step), Mathf.Lerp(start.y, end.y, step), Mathf.Lerp(start.z, end.z, step));
+            ve.style.translate = new StyleTranslate(newTranslate);
+            yield return null;
+        }
     }
 }
