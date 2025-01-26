@@ -26,14 +26,22 @@ namespace Hmlca.Untitled
 
         private void Update()
         {
+            Vector3Int dir = Vector3Int.zero;
             if (Input.GetKeyDown(MOVE_UP))
-                mover.TryMove(new Vector3Int(0, 0, 1));
+                dir = new Vector3Int(0, 0, 1);
             else if (Input.GetKeyDown(MOVE_DOWN))
-                mover.TryMove(new Vector3Int(0, 0, -1));
+                dir = new Vector3Int(0, 0, -1);
             else if (Input.GetKeyDown(MOVE_LEFT))
-                mover.TryMove(new Vector3Int(-1, 0, 0));
+                dir = new Vector3Int(-1, 0, 0);
             else if (Input.GetKeyDown(MOVE_RIGHT))
-                mover.TryMove(new Vector3Int(1, 0, 0));
+                dir = new Vector3Int(1, 0, 0);
+            if (dir != Vector3Int.zero)
+            {
+                if (mover.TryMove(dir))
+                {
+
+                }
+            }
         }
     }
 }

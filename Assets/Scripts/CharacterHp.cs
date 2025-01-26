@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Hmlca.Untitled
 {
     [RequireComponent(typeof(CharacterAnimations))]
     public class CharacterHp : MonoBehaviour
     {
+        public UnityEvent OnDamage = new UnityEvent();
+        public UnityEvent OnDeath = new UnityEvent();
         public int hp = 100;
         public int maxHp = 100;
         public bool isDead;
@@ -46,6 +49,7 @@ namespace Hmlca.Untitled
         public void Damage(int damage)
         {
             animator.DamagedAnim();
+            OnDamage?.Invoke();
         }
 
 
@@ -54,6 +58,7 @@ namespace Hmlca.Untitled
             if (!isDead)
             {
                 isDead = true;
+                OnDeath?.Invoke();
             }
         }
     }
