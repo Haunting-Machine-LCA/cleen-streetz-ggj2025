@@ -4,12 +4,3 @@
 .animated-btn:hover {
     scale: 1.2 1.2;
 }
-
-.background {
-    transition-duration: 1s, 1s;
-    transition-property: position, position;
-    transition-timing-function: ease-in-out, ease-in-out;
-    left: 0;
-    top: -11px;
-    right: -27px;
-}
