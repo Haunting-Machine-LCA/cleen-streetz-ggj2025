@@ -10,6 +10,7 @@ namespace Hmlca.Untitled
     public class Turn 
     {
         public TurnController controller;
+        public bool dequeueWhenDone;
 
 
         public static Turn Player()
@@ -28,7 +29,11 @@ namespace Hmlca.Untitled
 
         public static Turn Tutorial()
         {
-            var turn = new Turn { controller = TurnController.TUTORIAL };
+            var turn = new Turn 
+            { 
+                controller = TurnController.TUTORIAL,
+                dequeueWhenDone = true,
+            };
             return turn;
         }
     }

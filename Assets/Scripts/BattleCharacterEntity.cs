@@ -8,6 +8,7 @@ namespace Hmlca.Untitled
     {
         protected override void Start()
         {
+            forceSpawn = true;
             base.Start();
             if (failedSpawn)
             {

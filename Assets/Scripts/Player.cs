@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class Attack
+    [RequireComponent(typeof(BattleCharacterEntity))]
+    public class Player : Singleton<Player>
     {
-        public int damage;
+
     }
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class PlayerAttack : MonoBehaviour
+    [RequireComponent(typeof(Player))]
+    public class PlayerAttack : Singleton<PlayerAttack>
     {
-
+        public int ap = 3;
+        public int maxAp = 3;
+        public int baseDamage = 10;
     }
 }

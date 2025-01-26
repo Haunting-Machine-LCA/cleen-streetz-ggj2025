@@ -24,7 +24,7 @@ namespace Hmlca.Untitled
         protected bool forceSpawn;
         protected bool failedSpawn;
         protected bool isQuitting;
-        protected GridManager gm;
+        public GridManager gm;
         [Header("Transform")]
         [SerializeField] private Vector3Int gridPosition;
 
@@ -121,7 +121,7 @@ namespace Hmlca.Untitled
 
         protected virtual void Awake()
         {
-            gm = GridManager.GetSingleton();
+            gm = GridManager.GetSingleton(true);
             Application.quitting += () => isQuitting = true;
         }
 

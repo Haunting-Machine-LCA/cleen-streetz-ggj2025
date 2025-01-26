@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class PlayerMovement : MonoBehaviour
+    [RequireComponent(typeof(Player), typeof(GridMover))]
+    public class PlayerMovement : Singleton<PlayerMovement>
     {
         public const KeyCode MOVE_UP = KeyCode.W;
         public const KeyCode MOVE_DOWN = KeyCode.S;
@@ -12,6 +13,27 @@ namespace Hmlca.Untitled
         public const KeyCode MOVE_RIGHT = KeyCode.D;
 
 
+        [SerializeField] private GridMover mover;
 
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (mover)
+                mover = GetComponent<GridMover>();
+        }
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(MOVE_UP))
+                mover.TryMove(new Vector3Int(0, 0, 1));
+            else if (Input.GetKeyDown(MOVE_DOWN))
+                mover.TryMove(new Vector3Int(0, 0, -1));
+            else if (Input.GetKeyDown(MOVE_LEFT))
+                mover.TryMove(new Vector3Int(-1, 0, 0));
+            else if (Input.GetKeyDown(MOVE_RIGHT))
+                mover.TryMove(new Vector3Int(1, 0, 0));
+        }
     }
 }
