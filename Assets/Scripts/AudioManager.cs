@@ -54,6 +54,16 @@ namespace Hmlca.Untitled
             // }
         }
 
+        public void Deafen()
+        {
+            audioSource.volume = 0.05f;
+        }
+
+        public void Undeafen()
+        {
+            audioSource.volume = 0.5f;
+        }
+
         public void StartMainMenuMusic()
         {
             PlayMusic(menuMusic);
