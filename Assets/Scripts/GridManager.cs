@@ -70,7 +70,7 @@ namespace Hmlca.Untitled
         void Start()
         {   
             PopulateGrid();
-            // DrawGrid();
+            DrawGrid();
         }
 
     
@@ -107,7 +107,7 @@ namespace Hmlca.Untitled
                 // Choose random position on ground
                 Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
                 Grid.GetGridPosition(pos, out var x, out var y, out var z);
-                var gridPos = new Vector3Int(x, z);
+                var gridPos = new Vector3Int(x, 1, z);
                 // Place
                 var thisObj = PlaceObject(obj, gridPos);
                 if (thisObj != null)
@@ -170,13 +170,15 @@ namespace Hmlca.Untitled
                     }
                 }
                 // Debug.Log(pos1 + " " + pos2);
-                Grid.GetGridPosition(pos1, out Vector3Int gridPos1);
-                Grid.GetGridPosition(pos2, out Vector3Int gridPos2);
-                var thisObj = PlaceObject(obj, gridPos1, gridPos2);
+                // Grid.GetGridPosition(pos1, out Vector3Int gridPos1);
+                // Grid.GetGridPosition(pos2, out Vector3Int gridPos2);
+                var thisObj = PlaceObject(obj, Vector3Int.FloorToInt(pos1));
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
                     thisObj.transform.Rotate(0, rotation, 0);
+                    var secondHalf = PlaceObject(obj, Vector3Int.FloorToInt(pos2));
+                    secondHalf.transform.parent = blockersParent;
                 }
             }
 
@@ -253,6 +255,7 @@ namespace Hmlca.Untitled
                 y = pos.y;
                 z = pos.z;
                 var worldPosition = grid.GetWorldPosition(x, y, z);
+                Debug.Log(obj.name + " " + worldPosition);
 
                 GridNode node = grid.GetValue(x, y, z);
                 if (node == null)
