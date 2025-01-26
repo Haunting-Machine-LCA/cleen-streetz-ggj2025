@@ -11,6 +11,7 @@ namespace Hmlca.Untitled
 
         private AudioSource audioSource;
         private AudioSource sfxSource;
+        public AudioClip hmSFX;
         public AudioClip backSFX;
         public AudioClip navSFX;
         public AudioClip selectSFX;
@@ -22,7 +23,7 @@ namespace Hmlca.Untitled
             // Create component
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.loop = true;
-            audioSource.playOnAwake = true;
+            audioSource.playOnAwake = false;
             audioSource.volume = 0.5f;
             sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
@@ -30,7 +31,6 @@ namespace Hmlca.Untitled
 
             // Start on menu
             audioSource.clip = menuMusic;
-            PlayMusic(menuMusic);
         }
 
         void Update()
@@ -39,6 +39,11 @@ namespace Hmlca.Untitled
             // {
             //     CrossfadeMusic(gameMusic);
             // }
+        }
+
+        public void StartMainMenuMusic()
+        {
+            PlayMusic(menuMusic);
         }
 
         public void PlayMusic(AudioClip clip)
@@ -64,6 +69,11 @@ namespace Hmlca.Untitled
         public void PlaySelectSFX()
         {
             PlaySFX(navSFX);
+        }
+
+        public void PlayHMSFX()
+        {
+            PlaySFX(hmSFX);
         }
 
         private void PlaySFX(AudioClip clip)
