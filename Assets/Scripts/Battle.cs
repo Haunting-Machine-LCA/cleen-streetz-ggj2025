@@ -30,6 +30,7 @@ namespace Hmlca.Untitled
             return battle;
         }
 
+
         public List<GameObject> Spawn()
         {
             List<GameObject> battlerGOs = new List<GameObject>();

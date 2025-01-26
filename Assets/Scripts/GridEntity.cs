@@ -46,7 +46,9 @@ namespace Hmlca.Untitled
         public static bool RegisterGridObject(GridEntity entity, GridManager gm, params Vector3Int[] gridPositions)
         {
             GameObject go = entity?.gameObject;
-            if (!go || gridPositions == null || gridPositions.Length == 0)
+            if (gridPositions == null || gridPositions.Length == 0)
+                gridPositions = new Vector3Int[] { entity.GridPosition };
+            if (!go)
             {
                 reasonForFail = $"gameobject does not exist";
                 return false;

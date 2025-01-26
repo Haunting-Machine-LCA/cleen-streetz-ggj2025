@@ -61,5 +61,11 @@ namespace Hmlca.Untitled
                 OnDeath?.Invoke();
             }
         }
+
+        public void SetCharacter(BattleCharacter character)
+        {
+            hp = character.health;
+            maxHp = character.health;   
+        }
     }
 }
