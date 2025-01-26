@@ -12,12 +12,12 @@
     </ui:VisualElement>
     <ui:VisualElement name="Instructions" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Graphics/Textures/Placeholders/concrete.jpg?fileID=2800000&amp;guid=3fcd11d9cdda78c42aaaea93144967a9&amp;type=3#concrete&quot;); display: none;">
         <ui:VisualElement name="Buttons" style="flex-grow: 1; justify-content: flex-end; align-items: flex-end; align-self: flex-start; margin-bottom: 25px; margin-left: 25px;">
-            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackBtn" style="align-self: stretch; justify-content: flex-start; display: flex; visibility: visible;" />
+            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackBtn1" style="align-self: stretch; justify-content: flex-start; display: flex; visibility: visible;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="Options" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Graphics/Textures/Placeholders/concrete.jpg?fileID=2800000&amp;guid=3fcd11d9cdda78c42aaaea93144967a9&amp;type=3#concrete&quot;); display: none;">
         <ui:VisualElement name="Buttons" style="flex-grow: 1; justify-content: flex-end; align-items: flex-end; align-self: flex-start; margin-bottom: 25px; margin-left: 25px;">
-            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackBtn" style="align-self: stretch; justify-content: flex-start; display: flex; visibility: visible;" />
+            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackBtn2" style="align-self: stretch; justify-content: flex-start; display: flex; visibility: visible;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
