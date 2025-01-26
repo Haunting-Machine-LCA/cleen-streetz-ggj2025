@@ -94,6 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b3d2ef03bad844098377c44f956cfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGridPositionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  speed: 1
+  xVelocity: 0
+  yVelocity: 0
+  yOffset: 1
   gridPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4296258785291535258
 MonoBehaviour:

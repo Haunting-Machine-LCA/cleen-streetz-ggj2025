@@ -49,6 +49,14 @@ namespace Hmlca.Untitled
             z = Mathf.FloorToInt((worldPosition.z - originPosition.z) / cellSize);
         }
 
+
+        public void GetGridPosition(Vector3 worldPosition, out Vector3Int pos)
+        {
+            GetGridPosition(worldPosition, out var x, out var y, out var z);
+            pos = new Vector3Int(x, y, z);
+        }
+
+
         public void SetValue(int x, int y, int z, TGridObject value)
         {
             if (IsValidGridPosition(x, y, z))

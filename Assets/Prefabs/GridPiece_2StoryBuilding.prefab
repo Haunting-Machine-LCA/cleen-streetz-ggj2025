@@ -145,6 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8640242597746066307}
+  - component: {fileID: 3856901001269691506}
   m_Layer: 0
   m_Name: GridPiece_2StoryBuilding
   m_TagString: Untagged
@@ -172,6 +173,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7044659755329114454
 GameObject:
+--- !u!114 &3856901001269691506
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -381,3 +384,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 4977012776818292415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1510092017f77c4c8c88b43caa83417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGridPositionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  speed: 0
+  xVelocity: 0
+  yVelocity: 0
+  yOffset: 1
+  gridPosition: {x: 0, y: 0, z: 0}

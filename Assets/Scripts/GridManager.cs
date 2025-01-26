@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Hmlca.Untitled
 {
@@ -32,15 +29,46 @@ namespace Hmlca.Untitled
 
         public Grid<GridNode> Grid => grid;
 
-
-        // Start is called before the first frame update
-        void Start()
+    
+        public bool this[Vector2Int pos]
         {
+            get
+            {
+                int x = pos.x;
+                int y = pos.y;
+                if (x >= 0 && y >= 0 && x < width && y < depth)
+                    return grid.GetValue(x, 0, y).isOccupied;
+                return true;
+            }
+            set
+            {
+                int x = pos.x;
+                int y = pos.y;
+                if (x >= 0 && y >= 0 && x < width && y < depth)
+                {
+                    var val = grid.GetValue(x, 0, y);
+                    if (val.isOccupied)
+                    {
+
+                    }
+                }
+            }
+        }
+
+
+        protected override void Awake()
+        {
+            base.Awake();
             grid = new Grid<GridNode>(width, height, depth, cellSize, Vector3.zero, (g, x, y, z) => new GridNode(x, y, z));
             gridPiecesParent = transform.Find("GridPieces");
             groundParent = gridPiecesParent.Find("Ground");
             blockersParent = gridPiecesParent.Find("Blockers");
-            
+        }
+
+
+        // Start is called before the first frame update
+        void Start()
+        {   
             PopulateGrid();
             // DrawGrid();
         }
@@ -78,8 +106,10 @@ namespace Hmlca.Untitled
                 GameObject obj = blockerPrefabs_1x1[Random.Range(0, blockerPrefabs_1x1.Length)];
                 // Choose random position on ground
                 Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
+                Grid.GetGridPosition(pos, out var x, out var y, out var z);
+                var gridPos = new Vector3Int(x, z);
                 // Place
-                var thisObj = PlaceObject(pos, obj);
+                var thisObj = PlaceObject(obj, gridPos);
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
@@ -140,13 +170,13 @@ namespace Hmlca.Untitled
                     }
                 }
                 // Debug.Log(pos1 + " " + pos2);
-                var thisObj = PlaceObject(pos1, obj);
+                Grid.GetGridPosition(pos1, out Vector3Int gridPos1);
+                Grid.GetGridPosition(pos2, out Vector3Int gridPos2);
+                var thisObj = PlaceObject(obj, gridPos1, gridPos2);
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
                     thisObj.transform.Rotate(0, rotation, 0);
-                    // Mark its secondary block occupied too
-                    PlaceObject(pos2, new GameObject());
                 }
             }
 
@@ -158,7 +188,8 @@ namespace Hmlca.Untitled
                 // Choose random position on ground
                 Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
                 // Place
-                var thisObj = PlaceObject(pos, obj);
+                Grid.GetGridPosition(pos, out Vector3Int gridPos);
+                var thisObj = PlaceObject(obj, gridPos);
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
@@ -176,7 +207,8 @@ namespace Hmlca.Untitled
                 // Choose random position on ground
                 Vector3 pos = new Vector3(Random.Range(0, width), 1, Random.Range(0, depth));
                 // Place
-                var thisObj = PlaceObject(pos, obj);
+                Grid.GetGridPosition(pos, out Vector3Int gridPos);
+                var thisObj = PlaceObject(obj, gridPos);
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
@@ -211,23 +243,46 @@ namespace Hmlca.Untitled
             }
         }
 
-        public GameObject PlaceObject(Vector3 worldPosition, GameObject obj)
+        public GameObject PlaceObject(GameObject obj = null, params Vector3Int[] gridPos)
         {
-            int x, y, z;
-            grid.GetGridPosition(worldPosition, out x, out y, out z);
+            bool setPos = false;
+            foreach (var pos in gridPos)
+            {
+                int x, y, z;
+                x = pos.x;
+                y = pos.y;
+                z = pos.z;
+                var worldPosition = grid.GetWorldPosition(x, y, z);
 
-            GridNode node = grid.GetValue(x, y, z);
-            if (node != null && !node.isOccupied)
-            {
-                node.isOccupied = true;
-                GameObject thisObj = Instantiate(obj, grid.GetWorldPosition(x, y, z), Quaternion.identity);
-                return thisObj;
+                GridNode node = grid.GetValue(x, y, z);
+                if (node == null)
+                    print("node null?");
+                if (node != null && !node.isOccupied)
+                {
+                    node.isOccupied = true;
+                    GameObject thisObj = Instantiate(obj, worldPosition, Quaternion.identity);
+
+
+                    if (thisObj.TryGetComponent<GridEntity>(out var entity))
+                    {
+                        Vector3Int offset = pos - gridPos[0];
+                        if (!setPos)
+                        {
+                            entity.GridPosition = pos;
+                            setPos = true;
+                        }
+                        entity.occupiedGridPositions.Add(offset);
+                    }
+
+                    return thisObj;
+                }
+                else
+                {
+                    Debug.Log("Cell is already occupied!");
+                    return null;
+                }
             }
-            else
-            {
-                Debug.Log("Cell is already occupied!");
-                return null;
-            }
+            return null;
         }
     }
 }

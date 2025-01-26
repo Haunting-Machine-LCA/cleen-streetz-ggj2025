@@ -9,6 +9,12 @@ namespace Hmlca.Untitled
         protected override void Start()
         {
             base.Start();
+            var x = GridPosition.x;
+            var y = GridPosition.y;
+            var z = GridPosition.z;
+            var node = gm.Grid.GetValue(x, y, z);
+            if (node.isOccupied)
+                DestroyGridObjectAt(GridPosition);
             BattleSystem.GetSingleton().RegisterBattler(this);
         }
 
@@ -16,7 +22,14 @@ namespace Hmlca.Untitled
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            BattleSystem.GetSingleton().UnregisterBattler(this);
+            if (!isQuitting)
+                BattleSystem.GetSingleton().UnregisterBattler(this);
+        }
+
+
+        public void SetCharacter(BattleCharacter character)
+        {
+
         }
     }
 }

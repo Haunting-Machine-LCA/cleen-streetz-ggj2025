@@ -87,6 +87,10 @@ namespace Hmlca.Untitled
         public GameObject Spawn()
         {
             gameObject = GameObject.Instantiate(prefab);
+            var pos = gameObject.transform.position;
+            pos.y = 1;
+            gameObject.transform.position = pos;
+            gameObject.SendMessage("SetCharacter", this);
             return gameObject;
         }
     }
