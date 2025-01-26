@@ -7,14 +7,14 @@ namespace Hmlca.Untitled
 {
     public class HealthbarUI : MonoBehaviour
     {
-        private Animator healthbarAnim;
+        private Animator anim;
         private int health = 5;
         public 
 
         // Start is called before the first frame update
         void Start()
         {
-            healthbarAnim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
         }
 
         void Update()
@@ -30,22 +30,23 @@ namespace Hmlca.Untitled
             // }
         }
 
+        public void SetHealthUI(int val)
+        {
+            if (0 <= val && val <= 5)
+            {
+                health = val;
+                anim.SetInteger("Health", health);
+            }
+        }
+
         public void DecreaseHealthUI()
         {
-            if (health > 0)
-            {
-                health -= 1;
-                healthbarAnim.SetInteger("Health", health);
-            }
+            SetHealthUI(health - 1);
         }
 
         public void IncreaseHealthUI()
         {
-            if (health < 5)
-            {
-                health += 1;
-                healthbarAnim.SetInteger("Health", health);
-            }
+            SetHealthUI(health + 1);
         }
     }
 }
