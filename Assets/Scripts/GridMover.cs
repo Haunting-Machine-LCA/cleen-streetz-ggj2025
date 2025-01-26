@@ -22,26 +22,24 @@ namespace Hmlca.Untitled
         {
             facingDirection = new Vector2Int(direction.x, direction.z);
             Vector3Int endPos = entity.GridPosition + direction;
-            return !entity.gm.Grid.GetValue(endPos.x, endPos.y, endPos.z)?.isOccupied ?? true;
+            return (!entity.gm.Grid.GetValue(endPos.x, endPos.y, endPos.z)?.isOccupied) ?? false;
         }
 
 
-        public IEnumerator AnimateToNextTile(Vector3Int newGridPos, bool failed = false)
+        public IEnumerator AnimateToNextTile(Vector3Int newGridPos, float secs)
         {
             Vector3Int startGridPos = entity.GridPosition;
             float time = 0;
-            float duration = 0.5f;
             Vector3 startPos = entity.transform.position;
             Vector3 endPos = entity.gm.Grid.GetWorldPosition(newGridPos.x, newGridPos.y, newGridPos.z);
-            while (time < duration)
+            while (time < secs)
             {
-                entity.transform.position = Vector3.Lerp(startPos, endPos, time / duration);
+                entity.transform.position = Vector3.Lerp(startPos, endPos, time / secs);
                 time += Time.deltaTime;
                 yield return null;
             }
             entity.transform.position = endPos;
-            if (!failed)
-                entity.GridPosition = newGridPos;
+            entity.GridPosition = newGridPos;
         }
     }
 }

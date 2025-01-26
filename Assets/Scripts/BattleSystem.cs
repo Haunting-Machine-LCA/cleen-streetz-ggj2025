@@ -8,7 +8,7 @@ namespace Hmlca.Untitled
 {
     public class BattleSystem : Singleton<BattleSystem>
     {
-        public enum BattleState { SETUP, COMMAND, EXECUTE, WIN, LOSE }
+        public enum BattleState { PAUSED, COMMAND, EXECUTE, WIN, LOSE }
 
 
         public UnityEvent OnBattleStart = new UnityEvent();
@@ -74,7 +74,7 @@ namespace Hmlca.Untitled
         public void ResetBattle(bool resetPlayer = false)
         {
             print("resetting battle");
-            GoToState(BattleState.SETUP);
+            GoToState(BattleState.PAUSED);
             ResetGrid();
             if (resetPlayer)
                 ResetPlayer();
@@ -140,7 +140,7 @@ namespace Hmlca.Untitled
             this.state = state;
             switch (state)
             {
-                case BattleState.SETUP:
+                case BattleState.PAUSED:
                     break;
                 case BattleState.COMMAND:
                     OnEnterCommand?.Invoke();

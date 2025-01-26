@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
 
 namespace Hmlca.Untitled
 {
@@ -53,9 +52,12 @@ namespace Hmlca.Untitled
                         StopCoroutine(moveRoutine);
                     StartCoroutine(
                         MoveTo(
-                            mover.AnimateToNextTile(entity.GridPosition + dir)
+                            mover.AnimateToNextTile(
+                                entity.GridPosition + dir,
+                                0.25f
+                            )
                         )
-                    );  
+                    );
                     animator.StartRunningAnim();
                 }
             }
@@ -65,7 +67,9 @@ namespace Hmlca.Untitled
         private IEnumerator MoveTo(IEnumerator routine)
         {
             moveRoutine = StartCoroutine(routine);
-            yield return moveRoutine;
+            var turnSystem = TurnSystem.GetSingleton();
+            turnSystem.currentTurnRoutine = moveRoutine;
+            yield return turnSystem.ExecuteTurn(TurnController.PLAYER);
         }
     }
 }

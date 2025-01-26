@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : Singleton<AudioManager>
     {
         public static AudioManager Instance;
         public AudioClip menuMusic;
@@ -17,8 +17,9 @@ namespace Hmlca.Untitled
         public AudioClip navSFX;
         public AudioClip selectSFX;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             // Make it a singleton
             if (Instance == null)
                 Instance = this;

@@ -70,15 +70,15 @@ namespace Hmlca.Untitled
             {
                 PlayerMovement.GetSingleton().enabled = false;
                 PlayerAttack.GetSingleton().enabled = false;
-                currentTurnRoutine = StartCoroutine(ExecuteTurn(CurrentTurn));
+                currentTurnRoutine = StartCoroutine(ExecuteTurn(CurrentTurn.controller));
             }
         }
 
 
-        public IEnumerator ExecuteTurn(Turn turn)
+        public IEnumerator ExecuteTurn(TurnController turn)
         {
             BattleSystem.GetSingleton().GoToState(BattleSystem.BattleState.EXECUTE);
-            if (turn.controller == TurnController.ENEMY)
+            if (turn == TurnController.ENEMY)
             {
                 EnemyAI.currentTurnPlans.Clear();
                 var enemies = FindObjectsByType<EnemyAI>(
@@ -96,6 +96,11 @@ namespace Hmlca.Untitled
                 }
 
             }
+            else
+            {
+                if (currentTurnRoutine != null)
+                    yield return currentTurnRoutine;
+            }
             OnTurnEnd();
         }
 
@@ -112,6 +117,11 @@ namespace Hmlca.Untitled
                     return;
                 }
             }
+            if (currentTurnIndex + 1 >= turnQueue.Count)
+                currentTurnIndex = 0;
+            else
+                currentTurnIndex++;
+            NextTurn();
         }
     }
 }
