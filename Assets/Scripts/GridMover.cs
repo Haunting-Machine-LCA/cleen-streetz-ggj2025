@@ -22,7 +22,7 @@ namespace Hmlca.Untitled
         {
             facingDirection = new Vector2Int(direction.x, direction.z);
             Vector3Int endPos = entity.GridPosition + direction;
-            return entity.gm.Grid.GetValue(endPos.x, endPos.y, endPos.z)?.isOccupied ?? false;
+            return !entity.gm.Grid.GetValue(endPos.x, endPos.y, endPos.z)?.isOccupied ?? true;
         }
 
 

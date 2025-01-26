@@ -14,11 +14,12 @@ namespace Hmlca.Untitled
         private IEnumerator Start()
         {
             OnGameStart.Invoke();
-            yield return new WaitUntil(() =>
-            {
-                return Input.GetKeyDown(KeyCode.Space);
-            });
+            //yield return new WaitUntil(() =>
+            //{
+            //    return Input.GetKeyDown(KeyCode.Space);
+            //});
             OnGameLoad.Invoke();
+            yield return null;
         }
 
 
