@@ -6,23 +6,31 @@ namespace Hmlca.Untitled
 {
     public class AudioManager : MonoBehaviour
     {
+        public static AudioManager Instance;
         public AudioClip menuMusic;
         public AudioClip gameMusic;
 
         private AudioSource audioSource;
         private AudioSource sfxSource;
+        public AudioClip hmSFX;
         public AudioClip backSFX;
         public AudioClip navSFX;
         public AudioClip selectSFX;
 
         void Awake()
         {
+            // Make it a singleton
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this.gameObject);
+
             DontDestroyOnLoad(gameObject); // Keep playing across scenes
 
             // Create component
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.loop = true;
-            audioSource.playOnAwake = true;
+            audioSource.playOnAwake = false;
             audioSource.volume = 0.5f;
             sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
@@ -30,7 +38,12 @@ namespace Hmlca.Untitled
 
             // Start on menu
             audioSource.clip = menuMusic;
-            PlayMusic(menuMusic);
+        }
+
+        void Start()
+        {
+            // PlayHMSFX();
+            StartMainMenuMusic();
         }
 
         void Update()
@@ -39,6 +52,11 @@ namespace Hmlca.Untitled
             // {
             //     CrossfadeMusic(gameMusic);
             // }
+        }
+
+        public void StartMainMenuMusic()
+        {
+            PlayMusic(menuMusic);
         }
 
         public void PlayMusic(AudioClip clip)
@@ -63,7 +81,12 @@ namespace Hmlca.Untitled
 
         public void PlaySelectSFX()
         {
-            PlaySFX(navSFX);
+            PlaySFX(selectSFX);
+        }
+
+        public void PlayHMSFX()
+        {
+            PlaySFX(hmSFX);
         }
 
         private void PlaySFX(AudioClip clip)
@@ -71,7 +94,12 @@ namespace Hmlca.Untitled
             sfxSource.PlayOneShot(clip);
         }
 
-        public void CrossfadeMusic(AudioClip newClip, float fadeDuration = 1.5f)
+        public void ToGameMusic()
+        {
+            CrossfadeMusic(gameMusic);
+        }
+
+        private void CrossfadeMusic(AudioClip newClip, float fadeDuration = 1.5f)
         {
             StartCoroutine(FadeMusic(newClip, fadeDuration));
         }
