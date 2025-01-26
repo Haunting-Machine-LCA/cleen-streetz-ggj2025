@@ -20,15 +20,19 @@ namespace Hmlca.Untitled
             }
             else if (Input.GetKeyDown(CHEAT_RESET_BATTLE))
             {
+                BattleSystem.GetSingleton().ResetBattle(true);
             }
             else if (Input.GetKeyDown(CHEAT_NEXT_BATTLE))
             {
+                BattleSystem.GetSingleton().NextBattle();
             }
             else if (Input.GetKeyDown(CHEAT_WIN))
             {
+                BattleSystem.GetSingleton().Win();
             }
             else if (Input.GetKeyDown(CHEAT_LOSE))
             {
+                BattleSystem.GetSingleton().Lose();
             }
         }
     }
