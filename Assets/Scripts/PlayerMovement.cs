@@ -70,6 +70,7 @@ namespace Hmlca.Untitled
             var turnSystem = TurnSystem.GetSingleton();
             turnSystem.currentTurnRoutine = moveRoutine;
             yield return turnSystem.ExecuteTurn(TurnController.PLAYER);
+            animator.StopRunningAnim();
         }
     }
 }

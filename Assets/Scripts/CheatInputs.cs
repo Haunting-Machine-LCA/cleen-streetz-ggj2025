@@ -11,6 +11,7 @@ namespace Hmlca.Untitled
         private const KeyCode CHEAT_NEXT_BATTLE = KeyCode.F4;
         private const KeyCode CHEAT_WIN = KeyCode.F7;
         private const KeyCode CHEAT_LOSE = KeyCode.F8;
+        private const KeyCode CHEAT_DMG_PLAYER = KeyCode.Minus;
 
 
         private void Update()
@@ -33,6 +34,12 @@ namespace Hmlca.Untitled
             else if (Input.GetKeyDown(CHEAT_LOSE))
             {
                 BattleSystem.GetSingleton().Lose();
+            }
+            else if (Input.GetKeyDown(CHEAT_DMG_PLAYER))
+            {
+                PlayerHp.GetSingleton()?
+                    .GetComponentInChildren<CharacterHp>()
+                    .Damage(10);
             }
         }
     }
