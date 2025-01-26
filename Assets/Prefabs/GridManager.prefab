@@ -84,11 +84,16 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 82629f1a8baec4d4ab2b09c70468d8f2, type: 2}
   - {fileID: 2100000, guid: aa9cf16a63c20064e80d6521dab164f0, type: 2}
   - {fileID: 2100000, guid: 71087b7f2160b874ab3831cfb62b291c, type: 2}
+  buildingMats:
+  - {fileID: 2100000, guid: 2c1796733ebf668479495fe708a6e009, type: 2}
+  - {fileID: 2100000, guid: 8da6d15a3d02aab4fa1a0cf421a9552d, type: 2}
+  - {fileID: 2100000, guid: 3e1ffbfbf7eed13478eae6a3264c7c11, type: 2}
+  - {fileID: 2100000, guid: a6502a41642748f46afa9fbca58170cd, type: 2}
   num1x1Blockers: 10
   blockerPrefabs_1x1:
   - {fileID: 3109142789453955162, guid: 14c5bb89992ecf548b0fb1b4225d9eb3, type: 3}
   - {fileID: 3277609887408632516, guid: 5c1dde928643a904a935a76920b74250, type: 3}
-  num2x1Blockers: 5
+  num2x1Blockers: 0
   blockerPrefabs_2x1:
   - {fileID: 823747443264043151, guid: af5d7c26150a839429da0a8fee0742f1, type: 3}
   num1x2Blockers: 5

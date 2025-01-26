@@ -14,6 +14,7 @@ namespace Hmlca.Untitled
         private float cellSize = 1f;
         public GameObject groundPrefab;
         public Material[] concreteMats;
+        public Material[] buildingMats;
         public int num1x1Blockers = 3;
         public GameObject[] blockerPrefabs_1x1;
         public int num2x1Blockers = 2;
@@ -157,7 +158,10 @@ namespace Hmlca.Untitled
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
+                    Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
+                    thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
                 }
+                
             }
 
             // 1x3 blockers
@@ -172,7 +176,10 @@ namespace Hmlca.Untitled
                 if (thisObj != null)
                 {
                     thisObj.transform.parent = blockersParent;
+                    Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
+                    thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
                 }
+                
             }
         }
 
