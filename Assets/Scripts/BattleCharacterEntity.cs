@@ -9,12 +9,21 @@ namespace Hmlca.Untitled
         protected override void Start()
         {
             base.Start();
-            var x = GridPosition.x;
-            var y = GridPosition.y;
-            var z = GridPosition.z;
-            var node = gm.Grid.GetValue(x, y, z);
-            if (node.isOccupied)
-                DestroyGridObjectAt(GridPosition);
+            if (failedSpawn)
+            {
+                var x = GridPosition.x;
+                var y = GridPosition.y;
+                var z = GridPosition.z;
+                var node = gm.Grid.GetValue(x, y, z);
+                if (node.isOccupied)
+                    DestroyGridObjectAt(GridPosition);
+                if (!RegisterGridObject(this, gm, GetGridPositions()))
+                {
+                    Debug.LogError($"Failed to register CHARACTER {gameObject.name} @{GridPosition}: {reasonForFail}");
+                    Destroy(gameObject);
+                    return;
+                }
+            }
             BattleSystem.GetSingleton().RegisterBattler(this);
         }
 

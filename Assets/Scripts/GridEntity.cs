@@ -10,6 +10,7 @@ namespace Hmlca.Untitled
     {
         public static Dictionary<Vector3Int, GameObject> gridObjectsByPos = new Dictionary<Vector3Int, GameObject>();
         public static Dictionary<GameObject, List<Vector3Int>> gridPosByObject = new Dictionary<GameObject, List<Vector3Int>>();
+        protected static string reasonForFail; // DEBUG
 
 
         public List<Vector3Int> occupiedGridPositions = new List<Vector3Int>();
@@ -20,6 +21,8 @@ namespace Hmlca.Untitled
         public int speed;
         public int xVelocity;
         public int yVelocity;
+        protected bool forceSpawn;
+        protected bool failedSpawn;
         protected bool isQuitting;
         protected GridManager gm;
         [Header("Transform")]
@@ -43,11 +46,17 @@ namespace Hmlca.Untitled
         public static bool RegisterGridObject(GridEntity entity, GridManager gm, params Vector3Int[] gridPositions)
         {
             GameObject go = entity?.gameObject;
-            if (!go)
+            if (!go || gridPositions == null || gridPositions.Length == 0)
+            {
+                reasonForFail = $"gameobject does not exist";
                 return false;
-            
-            if (gridObjectsByPos.TryGetValue(gridPositions[0], out var existingGo))
-                return false;
+            }
+
+            if (gridObjectsByPos.TryGetValue(gridPositions[0], out var existingGo) && existingGo != entity.gameObject)
+            {
+                reasonForFail = $"grid object @{gridPositions[0]} already exists: {existingGo.name}";
+                return false; 
+            }
 
             UnregisterGridObject(entity, gm);
 
@@ -66,7 +75,11 @@ namespace Hmlca.Untitled
                     .GetValue(x, y, z)
                     .isOccupied = true;
                 gridPosSet.Add(pos);
-                gridObjectsByPos.Add(pos, go);
+                if (!gridObjectsByPos.TryAdd(pos, go) && gridObjectsByPos[pos] != entity.gameObject)
+                {
+                    reasonForFail = $"grid object @{pos} already exists: {gridObjectsByPos[pos]?.name}";
+                    return false;
+                }
             }
             return true;
         }
@@ -121,17 +134,12 @@ namespace Hmlca.Untitled
 
             SetGridPosition(gridPosition);
 
-            var positions = new Vector3Int[occupiedGridPositions.Count];
-            for (int i = 0; i < occupiedGridPositions.Count; i++)
+            if (!RegisterGridObject(this, gm, GetGridPositions()))
             {
-                var pos = occupiedGridPositions[i];
-                pos = pos + gridPosition;
-                positions[i] = pos;
-            }
-
-            if (!RegisterGridObject(this, gm, positions))
-            {
-                Debug.LogWarning($"Failed to register grid object {gameObject.name} @{GridPosition}");
+                failedSpawn = true;
+                if (forceSpawn)
+                    return;
+                Debug.LogWarning($"Failed to register grid object {gameObject.name} @{GridPosition}: {reasonForFail}");
                 Destroy(gameObject);
             }
         }
@@ -139,7 +147,7 @@ namespace Hmlca.Untitled
 
         protected virtual void OnDisable()
         {
-            if (isQuitting)
+            if (isQuitting || !gm)
                 return;
             var grid = gm.Grid;
             grid.GetGridPosition(transform.position, out int x, out int y, out int z);
@@ -149,9 +157,23 @@ namespace Hmlca.Untitled
         }
 
 
+        public Vector3Int[] GetGridPositions()
+        {
+            Vector3Int[] positions = new Vector3Int[occupiedGridPositions.Count];
+            for (int i = 0; i < occupiedGridPositions.Count; i++)
+            {
+                var pos = occupiedGridPositions[i];
+                pos = pos + gridPosition;
+                positions[i] = pos;
+            }
+            return positions;
+        }
+
+
         public virtual void SetGridPosition(Vector3Int gridPosition)
         {
             this.gridPosition = gridPosition;
+            RegisterGridObject(this, gm, GetGridPositions());
             int x = gridPosition.x;
             int y = gridPosition.y;
             int z = gridPosition.z;
