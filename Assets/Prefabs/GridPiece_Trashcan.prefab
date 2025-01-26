@@ -418,7 +418,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6224853106940867709}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5218577208125117659, guid: e956206f37b8f6c47bf01ceb34a8fb4f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2716188171558008000}
   m_SourcePrefab: {fileID: 100100000, guid: e956206f37b8f6c47bf01ceb34a8fb4f, type: 3}
 --- !u!4 &1175723374765156451 stripped
 Transform:
@@ -426,3 +430,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7282448698757604895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3277609887408632516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5218577208125117659, guid: e956206f37b8f6c47bf01ceb34a8fb4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7282448698757604895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2716188171558008000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277609887408632516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1510092017f77c4c8c88b43caa83417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGridPositionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  speed: 0
+  xVelocity: 0
+  yVelocity: 0
+  yOffset: 1
+  gridPosition: {x: 0, y: 0, z: 0}

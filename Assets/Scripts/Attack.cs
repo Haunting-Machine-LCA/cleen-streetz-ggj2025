@@ -4,18 +4,8 @@ using UnityEngine;
 
 namespace Hmlca.Untitled
 {
-    public class Attack : MonoBehaviour
+    public class Attack
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public int damage;
     }
 }

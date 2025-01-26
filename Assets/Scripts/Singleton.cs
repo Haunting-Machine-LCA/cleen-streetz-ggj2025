@@ -33,7 +33,7 @@ namespace Hmlca.Untitled
         }
 
 
-        public static T GetSingleton()
+        public static T GetSingleton(bool supressFail = false)
         {
             Option<T> op = GetSingleton<T>();
             if (op.HasValue)
@@ -44,9 +44,16 @@ namespace Hmlca.Untitled
             }
             else
             {
-                print($"failed to find singleton of {typeof(T).Name}");
+                if (!supressFail)
+                    print($"failed to find singleton of {typeof(T).Name}");
                 return null;
             }
+        }
+
+
+        protected virtual void OnDestroy()
+        {
+            cache.Remove(typeof(T));
         }
     }
 }

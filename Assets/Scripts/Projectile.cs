@@ -9,5 +9,6 @@ namespace Hmlca.Untitled
         public int attackModifier;
         public int armorPenetration;
         public int range;
+        public bool meander;
     }
 }

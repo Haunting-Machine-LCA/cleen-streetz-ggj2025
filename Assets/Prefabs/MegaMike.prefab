@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 03c361d805776a44c955feda31283c46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 20, y: 20}
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9a34861229d240d4e824ccec045da606, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 20, y: 20}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8149261867173998570}
   - component: {fileID: 4919506690214616969}
-  - component: {fileID: 8423869692877800918}
+  - component: {fileID: 8941191924506938335}
   m_Layer: 0
   m_Name: MegaMike
   m_TagString: Untagged
@@ -224,7 +224,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8423869692877800918
+--- !u!114 &8941191924506938335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,6 +233,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6986595882369876334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a013a5398f5bd424db6ea9e551b9e5ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f17b1b814671804787b76395fd29347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
