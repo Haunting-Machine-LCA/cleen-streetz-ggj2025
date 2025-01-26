@@ -12,17 +12,26 @@ namespace Hmlca.Untitled
         public int xVelocity;
         public int yVelocity;
         [SerializeField] private Vector3Int gridPosition;
+        private GridManager gm;
+
+
+        protected virtual void Awake()
+        {
+            gm = GridManager.GetSingleton();
+        }
 
 
         protected virtual void Start()
         {
+            if (!gm)
+                gm = FindObjectOfType<GridManager>();
             BattleSystem.GetSingleton().RegisterGameObject(gameObject);
             SetGridPosition(gridPosition);
             int x = gridPosition.x;
             int y = gridPosition.y;
             int z = gridPosition.z;
-            GridManager.GetSingleton()
-                .Grid
+
+            gm.Grid
                 .GetValue(x, y, z)
                 .isOccupied = true;
         }
@@ -30,7 +39,7 @@ namespace Hmlca.Untitled
 
         protected virtual void OnDisable()
         {
-            var grid = GridManager.GetSingleton().Grid;
+            var grid = gm.Grid;
             grid.GetGridPosition(transform.position, out int x, out int y, out int z);
             gridPosition = new Vector3Int(x, y, z);
             grid.GetValue(x, y, z)
@@ -44,7 +53,8 @@ namespace Hmlca.Untitled
             int x = gridPosition.x;
             int y = gridPosition.y;
             int z = gridPosition.z;
-            var worldPosition = GridManager.GetSingleton().Grid.GetWorldPosition(x, y, z);
+            var worldPosition = gm.Grid
+                .GetWorldPosition(x, y, z);
             transform.position = worldPosition;
         }
 

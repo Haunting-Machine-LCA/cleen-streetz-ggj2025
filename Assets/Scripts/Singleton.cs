@@ -49,5 +49,11 @@ namespace Hmlca.Untitled
                 return null;
             }
         }
+
+
+        protected virtual void OnDestroy()
+        {
+            cache.Remove(typeof(T));
+        }
     }
 }
