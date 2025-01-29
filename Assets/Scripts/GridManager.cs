@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,15 +18,16 @@ namespace Hmlca.Untitled
         public int num1x1Blockers = 3;
         public GameObject[] blockerPrefabs_1x1;
         public int num2x1Blockers = 2;
-        public GameObject[] blockerPrefabs_2x1;
-        public float num1x2Blockers = 3;
-        public GameObject[] blockerPrefabs_1x2;
-        public float num1x3Blockers = 3;
-        public GameObject[] blockerPrefabs_1x3;
+        public GameObject blockerPrefab_2x1;
+        public int num1x2Blockers = 3;
+        public GameObject blockerPrefab_1x2;
+        public int num1x3Blockers = 3;
+        public GameObject blockerPrefab_1x3;
         private Transform gridPiecesParent;
         private Transform groundParent;
         private Transform blockersParent;
         private Grid<GridNode> grid;
+        private List<GameObject> blockerGameObjects = new List<GameObject>();
 
 
         public Grid<GridNode> Grid => grid;
@@ -85,12 +88,12 @@ namespace Hmlca.Untitled
 
                     if (x == 0 || x == width - 1 || z == 0 || z == depth - 1)
                     {
-                        groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = sidewalkMat; // Edge blocks are sidewalks
+                        groundPrefab.transform.Find("Main").GetComponent<Renderer>().material = sidewalkMat; // Edge blocks are sidewalks
                     }
                     else
                     {
                         Material randomConcreteMat = concreteMats[Random.Range(0, concreteMats.Length)]; // Choose a random concrete texture
-                        groundPrefab.transform.Find("Cube").GetComponent<Renderer>().material = randomConcreteMat;
+                        groundPrefab.transform.Find("Main").GetComponent<Renderer>().material = randomConcreteMat;
                     }
                     
                     var thisObj = PlaceObject(groundPrefab, Vector3Int.FloorToInt(worldPos));
@@ -100,28 +103,30 @@ namespace Hmlca.Untitled
             
             // Make blockers
             // 1x1 blockers
-            for (int i=0; i<num1x1Blockers; i++)
-            {
-                // Choose random object
-                GameObject obj = blockerPrefabs_1x1[Random.Range(0, blockerPrefabs_1x1.Length)];
-                // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-                Grid.GetGridPosition(pos, out var x, out var y, out var z);
-                var gridPos = new Vector3Int(x, 1, z);
-                // Place
-                var thisObj = PlaceObject(obj, gridPos);
-                if (thisObj != null)
-                {
-                    thisObj.transform.parent = blockersParent;
-                }
+            Debug.Log(blockerPrefabs_1x1.Length + " " + num1x1Blockers);
+            MakeRandObjBlockers(blockerPrefabs_1x1, num1x1Blockers);
+            // for (int i=0; i<num1x1Blockers; i++)
+            // {
+            //     // Choose random object
+            //     GameObject obj = blockerPrefabs_1x1[Random.Range(0, blockerPrefabs_1x1.Length)];
+            //     // Choose random position on ground
+            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
+            //     Grid.GetGridPosition(pos, out var x, out var y, out var z);
+            //     var gridPos = new Vector3Int(x, 1, z);
+            //     // Place
+            //     var thisObj = PlaceObject(obj, gridPos);
+            //     if (thisObj != null)
+            //     {
+            //         thisObj.transform.parent = blockersParent;
+            //     }
                 
-            }
+            // }
 
             // 2x1 blockers
             for (int i=0; i<num2x1Blockers; i++)
             {
                 // Choose random object
-                GameObject obj = blockerPrefabs_2x1[Random.Range(0, blockerPrefabs_2x1.Length)];
+                GameObject obj = blockerPrefab_2x1;
                 
                 // Choose random rotation
                 float[] directions = new float[]{0f, 90f, 180f, 270f};
@@ -183,41 +188,111 @@ namespace Hmlca.Untitled
             }
 
             // 1x2 blockers
-            for (int i=0; i<num1x2Blockers; i++)
-            {
-                // Choose random object
-                GameObject obj = blockerPrefabs_1x2[Random.Range(0, blockerPrefabs_1x2.Length)];
-                // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-                // Place
-                Grid.GetGridPosition(pos, out Vector3Int gridPos);
-                var thisObj = PlaceObject(obj, gridPos);
-                if (thisObj != null)
-                {
-                    thisObj.transform.parent = blockersParent;
-                    Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
-                    thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
-                }
+            MakeRandMatBlockers(blockerPrefab_1x2, buildingMats, num1x2Blockers);
+            // for (int i=0; i<num1x2Blockers; i++)
+            // {
+            //     // Choose random object
+            //     GameObject obj = blockerPrefabs_1x2[Random.Range(0, blockerPrefabs_1x2.Length)];
+            //     // Choose random position on ground
+            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
+            //     // Place
+            //     Grid.GetGridPosition(pos, out Vector3Int gridPos);
+            //     var thisObj = PlaceObject(obj, gridPos);
+            //     if (thisObj != null)
+            //     {
+            //         thisObj.transform.parent = blockersParent;
+            //         Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
+            //         thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
+            //     }
                 
-            }
+            // }
 
             // 1x3 blockers
-            for (int i=0; i<num1x3Blockers; i++)
+            MakeRandMatBlockers(blockerPrefab_1x3, buildingMats, num1x1Blockers);
+            // for (int i=0; i<num1x3Blockers; i++)
+            // {
+            //     // Choose random object
+            //     GameObject obj = blockerPrefabs_1x3[Random.Range(0, blockerPrefabs_1x3.Length)];
+            //     // Choose random position on ground
+            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
+            //     // Place
+            //     Grid.GetGridPosition(pos, out Vector3Int gridPos);
+            //     var thisObj = PlaceObject(obj, gridPos);
+            //     if (thisObj != null)
+            //     {
+            //         thisObj.transform.parent = blockersParent;
+            //         Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
+            //         thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
+            //     }
+                
+            // }
+        }
+
+        private void MakeRandMatBlockers(GameObject blockerPrefab, Material[] randomizedMats, int amount)
+        {
+            for (int i=0; i<amount; i++)
             {
-                // Choose random object
-                GameObject obj = blockerPrefabs_1x3[Random.Range(0, blockerPrefabs_1x3.Length)];
+                Debug.Log(i);
+                GameObject obj = blockerPrefab;
+
                 // Choose random position on ground
-                Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-                // Place
+                Vector3 pos = FindPositionOnGround();
+                Debug.Log(pos);
+                if (pos == Vector3.zero) return; // No more room for blocks
+
+                // Place in grid
                 Grid.GetGridPosition(pos, out Vector3Int gridPos);
                 var thisObj = PlaceObject(obj, gridPos);
                 if (thisObj != null)
                 {
+                    // Apply randomized materials
+                    if (randomizedMats.Length > 0)
+                    {
+                        Material mat = randomizedMats[Random.Range(0, randomizedMats.Length)];
+                        thisObj.transform.Find("Main").GetComponent<Renderer>().material = mat;
+                    }
+                    blockerGameObjects.Add(thisObj); // Keep track of them
                     thisObj.transform.parent = blockersParent;
-                    Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
-                    thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
                 }
-                
+            }
+        }
+
+        private void MakeRandObjBlockers(GameObject[] blockerPrefabs, int amount)
+        {
+            for (int i=0; i<amount; i++)
+            {
+                // Choose random object
+                GameObject obj = blockerPrefabs[Random.Range(0, blockerPrefabs.Length)];
+
+                // Choose random position on ground
+                Vector3 pos = FindPositionOnGround();
+                if (pos == Vector3.zero) return; // No more room for blocks
+
+                // Place in grid
+                Grid.GetGridPosition(pos, out Vector3Int gridPos);
+                var thisObj = PlaceObject(obj, gridPos);
+                if (thisObj != null)
+                {
+                    blockerGameObjects.Add(thisObj); // Keep track of them
+                    thisObj.transform.parent = blockersParent;
+                }
+            }
+        }
+
+        private Vector3 FindPositionOnGround()
+        {
+            int MAX_ATTEMPTS = width * height * depth;
+            int currAttempts = 0;
+            while(true)
+            {
+                currAttempts++;
+                int x = Random.Range(1, width-1);
+                int y = 1;
+                int z = Random.Range(1, depth-1);
+                if (!grid.GetValue(x, y, z).isOccupied) return new Vector3(x, y, z);
+
+                // Protect against infinite loops
+                if (currAttempts >= MAX_ATTEMPTS) return Vector3.zero;
             }
         }
 
@@ -286,6 +361,14 @@ namespace Hmlca.Untitled
                 }
             }
             return null;
+        }
+
+        public Vector3 GetCenterCoords()
+        {
+            float x = width * cellSize / 2;
+            float y = cellSize; // Center will be on ground
+            float z = depth * cellSize / 2;
+            return new Vector3(x, y, z);
         }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2783846041807811354}
   - component: {fileID: 2735061313897922090}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1510092017f77c4c8c88b43caa83417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occupiedGridPositions: []
   OnGridPositionChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -219,7 +220,7 @@ MonoBehaviour:
   speed: 0
   xVelocity: 0
   yVelocity: 0
-  yOffset: 1
+  gm: {fileID: 0}
   gridPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &3910218571362279976 stripped
 Transform:

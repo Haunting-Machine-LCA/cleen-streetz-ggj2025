@@ -3,49 +3,95 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Runtime.CompilerServices;
+using Cinemachine;
+using System.Net.Sockets;
+using PlasticGui.Help.Actions;
 
 namespace Hmlca.Untitled
 {
     public class CameraControl : Singleton<CameraControl>
     {
-        public Vector3 offset = new Vector3(10, 10, 10);
-        public Transform target;
-        public float duration = 0.5f;
-        private bool isMoving = false;
-        public bool IsMoving => isMoving;
+        private CinemachineBrain brain;
+        public CinemachineFreeLook closeCam;
+        public CinemachineVirtualCamera overviewCam;
+        private CameraDirection camDir = CameraDirection.NORTH;
+        private float targetAngle;
+        private Transform followTarget = null;
+        private Transform lookTarget = null;
+        private bool overviewing = false;
+        [SerializeField] Dictionary<CameraDirection,float> directionDict = new Dictionary<CameraDirection,float>{
+            {CameraDirection.NORTH, 0f},
+            {CameraDirection.SOUTH, 180f},
+            {CameraDirection.EAST, 90f},
+            {CameraDirection.WEST, -90f}
+        };
         
         // Start is called before the first frame update
         void Start()
         {
-        
+            if (overviewCam == null) Debug.LogError("Missing overview virtual camera!");
+            if (closeCam == null) Debug.LogError("Missing close virtual camera!");
+            brain = gameObject.GetComponent<CinemachineBrain>();
+            UseCloseCam(); // Close cam by default
+            SetCameraDirection(CameraDirection.NORTH); // Default direction
         }
 
-        // Update is called once per frame
         void Update()
         {
-        
+            // FIX ME - use Input instead of hardcoding
+            if (Input.GetMouseButton(0) && !overviewing)
+            {
+                UseOverviewCam();
+            }
+            if (Input.GetMouseButtonUp(0) && overviewing)
+            {
+                UseCloseCam();
+            }
         }
 
-        private void LateUpdate()
-        {
-            if (target == null || isMoving) return;
-
-            // Move
-            isMoving = true;
-            Vector3 targetPosition = target.position + offset;
-            transform.DOMove(targetPosition, duration)
-                .SetEase(Ease.OutQuad)
-                .OnStart(() => isMoving = true)
-                .OnComplete(() => isMoving = false);
-
-            // Rotation
-            Quaternion targetRotation = Quaternion.LookRotation(target.position - transform.position);
-            transform.DORotateQuaternion(targetRotation, duration).SetEase(Ease.OutExpo);
+        public Transform GetFollowTarget() {
+            return followTarget;
         }
 
-        public void SetFocus(Transform t)
+        public Transform GetLookTarget() {
+            return lookTarget;
+        }
+
+        public void FollowAndLookAt(Transform t) {
+            SetFollowOnly(t);
+            SetLookOnly(t);
+        }
+
+        public void SetFollowOnly(Transform t) {
+            followTarget = t;
+            closeCam.Follow = followTarget;
+        }
+
+        public void SetLookOnly(Transform t) {
+            lookTarget = t;
+            closeCam.LookAt = lookTarget;
+        }
+
+        public enum CameraDirection { NORTH, SOUTH, EAST, WEST }
+
+        public void SetCameraDirection(CameraDirection newDir) {
+            camDir = newDir;
+            targetAngle = directionDict[camDir];
+            closeCam.m_XAxis.Value = targetAngle;
+        }
+
+        private void UseOverviewCam()
         {
-            target = t;
+            overviewing = true;
+            closeCam.gameObject.SetActive(false);
+            overviewCam.gameObject.SetActive(true);
+        }
+
+        private void UseCloseCam()
+        {
+            overviewing = false;
+            overviewCam.gameObject.SetActive(false);
+            closeCam.gameObject.SetActive(true);
         }
     }
 }

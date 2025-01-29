@@ -79,7 +79,7 @@ namespace Hmlca.Untitled
             if (resetPlayer)
                 ResetPlayer();
             ResetBattleObjects();
-            CameraControl.GetSingleton().SetFocus(player.transform);
+            CameraControl.GetSingleton().FollowAndLookAt(player.transform);
             GoToState(BattleState.COMMAND);
             OnBattleStart?.Invoke();
         }

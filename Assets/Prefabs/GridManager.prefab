@@ -95,14 +95,14 @@ MonoBehaviour:
   - {fileID: 3109142789453955162, guid: 14c5bb89992ecf548b0fb1b4225d9eb3, type: 3}
   - {fileID: 3277609887408632516, guid: 5c1dde928643a904a935a76920b74250, type: 3}
   num2x1Blockers: 0
-  blockerPrefabs_2x1:
-  - {fileID: 823747443264043151, guid: af5d7c26150a839429da0a8fee0742f1, type: 3}
+  blockerPrefab_2x1: {fileID: 823747443264043151, guid: af5d7c26150a839429da0a8fee0742f1,
+    type: 3}
   num1x2Blockers: 5
-  blockerPrefabs_1x2:
-  - {fileID: 4977012776818292415, guid: 13bad6c65abae7247bb63e82df75c940, type: 3}
+  blockerPrefab_1x2: {fileID: 4977012776818292415, guid: 13bad6c65abae7247bb63e82df75c940,
+    type: 3}
   num1x3Blockers: 5
-  blockerPrefabs_1x3:
-  - {fileID: 4108399945309365678, guid: 6bf93c2130b5424419e624d0850c05a7, type: 3}
+  blockerPrefab_1x3: {fileID: 4108399945309365678, guid: 6bf93c2130b5424419e624d0850c05a7,
+    type: 3}
 --- !u!1 &7804278191170131053
 GameObject:
   m_ObjectHideFlags: 0
