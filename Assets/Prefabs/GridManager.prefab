@@ -94,7 +94,7 @@ MonoBehaviour:
   blockerPrefabs_1x1:
   - {fileID: 3109142789453955162, guid: 14c5bb89992ecf548b0fb1b4225d9eb3, type: 3}
   - {fileID: 3277609887408632516, guid: 5c1dde928643a904a935a76920b74250, type: 3}
-  num2x1Blockers: 0
+  num2x1Blockers: 2
   blockerPrefab_2x1: {fileID: 823747443264043151, guid: af5d7c26150a839429da0a8fee0742f1,
     type: 3}
   num1x2Blockers: 5

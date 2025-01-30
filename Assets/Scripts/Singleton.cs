@@ -39,7 +39,7 @@ namespace Hmlca.Untitled
             if (op.HasValue)
             {
                 T instance = op.ValueOr(() => { return null; });
-                print($"got singleton of {typeof(T).Name}: {instance?.name}");
+                // print($"got singleton of {typeof(T).Name}: {instance?.name}");
                 return instance;
             }
             else

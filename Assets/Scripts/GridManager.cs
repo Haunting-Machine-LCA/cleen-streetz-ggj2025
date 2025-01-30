@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -85,7 +86,6 @@ namespace Hmlca.Untitled
                 for (int z=0; z<depth; z++)
                 {
                     Vector3 worldPos = grid.GetWorldPosition(x, 0, z);
-
                     if (x == 0 || x == width - 1 || z == 0 || z == depth - 1)
                     {
                         groundPrefab.transform.Find("Main").GetComponent<Renderer>().material = sidewalkMat; // Edge blocks are sidewalks
@@ -103,197 +103,127 @@ namespace Hmlca.Untitled
             
             // Make blockers
             // 1x1 blockers
-            Debug.Log(blockerPrefabs_1x1.Length + " " + num1x1Blockers);
-            MakeRandObjBlockers(blockerPrefabs_1x1, num1x1Blockers);
-            // for (int i=0; i<num1x1Blockers; i++)
-            // {
-            //     // Choose random object
-            //     GameObject obj = blockerPrefabs_1x1[Random.Range(0, blockerPrefabs_1x1.Length)];
-            //     // Choose random position on ground
-            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-            //     Grid.GetGridPosition(pos, out var x, out var y, out var z);
-            //     var gridPos = new Vector3Int(x, 1, z);
-            //     // Place
-            //     var thisObj = PlaceObject(obj, gridPos);
-            //     if (thisObj != null)
-            //     {
-            //         thisObj.transform.parent = blockersParent;
-            //     }
-                
-            // }
+            MakeBlockers(blockerPrefabs_1x1, 1, num1x1Blockers);
 
             // 2x1 blockers
-            for (int i=0; i<num2x1Blockers; i++)
-            {
-                // Choose random object
-                GameObject obj = blockerPrefab_2x1;
-                
-                // Choose random rotation
-                float[] directions = new float[]{0f, 90f, 180f, 270f};
-                float rotation = directions[Random.Range(0, directions.Length)];
-
-                // Place
-                // Find appropriate position
-                bool posFound = false;
-                Vector3 pos1 = Vector3.zero;
-                Vector3 pos2 = Vector3.zero;
-                while (!posFound)
-                {
-                    // Choose random position on ground
-                    pos1 = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-
-                    // Get the secondary position based on rotation
-                    switch (rotation)
-                    {
-                        case 90f:
-                            // Secondary block is below
-                            pos2 = pos1 + new Vector3(0, 0, -cellSize);
-                            break;
-                        case 180f:
-                            // Secondary block is to the left
-                            pos2 = pos1 + new Vector3(-cellSize, 0, 0);
-                            break;
-                        case 270f:
-                            // Secondary block is above
-                            pos2 = pos1 + new Vector3(0, 0, cellSize);
-                            break;
-                        default:
-                            // Secondary block is to the right
-                            pos2 = pos1 + new Vector3(cellSize, 0, 0);
-                            break;
-                    }
-
-                    // Check if they are valid
-                    int x1, y1, z1;
-                    grid.GetGridPosition(pos1, out x1, out y1, out z1);
-                    int x2, y2, z2;
-                    grid.GetGridPosition(pos2, out x2, out y2, out z2);
-                    if (grid.IsValidGridPosition(x1, y1, z1) && grid.IsValidGridPosition(x2, y2, z2) &&
-                    !grid.GetValue(x1, y1, z1).isOccupied && !grid.GetValue(x2, y2, z2).isOccupied)
-                    {
-                        posFound = true;
-                    }
-                }
-                // Debug.Log(pos1 + " " + pos2);
-                // Grid.GetGridPosition(pos1, out Vector3Int gridPos1);
-                // Grid.GetGridPosition(pos2, out Vector3Int gridPos2);
-                var thisObj = PlaceObject(obj, Vector3Int.FloorToInt(pos1));
-                if (thisObj != null)
-                {
-                    thisObj.transform.parent = blockersParent;
-                    thisObj.transform.Rotate(0, rotation, 0);
-                    var secondHalf = PlaceObject(obj, Vector3Int.FloorToInt(pos2));
-                    secondHalf.transform.parent = blockersParent;
-                }
-            }
+            MakeBlockers(blockerPrefab_2x1, 2, num2x1Blockers);
 
             // 1x2 blockers
-            MakeRandMatBlockers(blockerPrefab_1x2, buildingMats, num1x2Blockers);
-            // for (int i=0; i<num1x2Blockers; i++)
-            // {
-            //     // Choose random object
-            //     GameObject obj = blockerPrefabs_1x2[Random.Range(0, blockerPrefabs_1x2.Length)];
-            //     // Choose random position on ground
-            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-            //     // Place
-            //     Grid.GetGridPosition(pos, out Vector3Int gridPos);
-            //     var thisObj = PlaceObject(obj, gridPos);
-            //     if (thisObj != null)
-            //     {
-            //         thisObj.transform.parent = blockersParent;
-            //         Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
-            //         thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
-            //     }
-                
-            // }
+            MakeBlockers(blockerPrefab_1x2, buildingMats, 1, num1x2Blockers);
 
             // 1x3 blockers
-            MakeRandMatBlockers(blockerPrefab_1x3, buildingMats, num1x1Blockers);
-            // for (int i=0; i<num1x3Blockers; i++)
-            // {
-            //     // Choose random object
-            //     GameObject obj = blockerPrefabs_1x3[Random.Range(0, blockerPrefabs_1x3.Length)];
-            //     // Choose random position on ground
-            //     Vector3 pos = new Vector3(Random.Range(1, width-1), 1, Random.Range(1, depth-1));
-            //     // Place
-            //     Grid.GetGridPosition(pos, out Vector3Int gridPos);
-            //     var thisObj = PlaceObject(obj, gridPos);
-            //     if (thisObj != null)
-            //     {
-            //         thisObj.transform.parent = blockersParent;
-            //         Material randomBuildingMat = buildingMats[Random.Range(0, buildingMats.Length)]; // Choose a random building texture
-            //         thisObj.transform.Find("Cube").GetComponent<Renderer>().material = randomBuildingMat;
-            //     }
-                
-            // }
+            MakeBlockers(blockerPrefab_1x3, buildingMats, 1, num1x1Blockers);
         }
+        
 
-        private void MakeRandMatBlockers(GameObject blockerPrefab, Material[] randomizedMats, int amount)
+        private void MakeBlockers(GameObject[] blockerPrefabs, Material[] variantMats, int countWidth, int countHeight, int amount)
         {
             for (int i=0; i<amount; i++)
             {
                 Debug.Log(i);
-                GameObject obj = blockerPrefab;
+                // Choose random object
+                GameObject obj = blockerPrefabs[Random.Range(0, blockerPrefabs.Length)];
+                Debug.Log(obj.name);
 
                 // Choose random position on ground
-                Vector3 pos = FindPositionOnGround();
-                Debug.Log(pos);
-                if (pos == Vector3.zero) return; // No more room for blocks
+                if (!ValidateGridSegments(countWidth, out Vector3Int[] positions, out Vector3 direction)) return;
 
-                // Place in grid
-                Grid.GetGridPosition(pos, out Vector3Int gridPos);
+                // Place real position in grid
+                Grid.GetGridPosition(positions[0], out Vector3Int gridPos);
                 var thisObj = PlaceObject(obj, gridPos);
-                if (thisObj != null)
+                if (thisObj == null) return;
+                else
                 {
-                    // Apply randomized materials
-                    if (randomizedMats.Length > 0)
+                    // Apply randomized materials if applicable
+                    if (variantMats.Length > 0)
                     {
-                        Material mat = randomizedMats[Random.Range(0, randomizedMats.Length)];
+                        Material mat = variantMats[Random.Range(0, variantMats.Length)];
                         thisObj.transform.Find("Main").GetComponent<Renderer>().material = mat;
                     }
                     blockerGameObjects.Add(thisObj); // Keep track of them
                     thisObj.transform.parent = blockersParent;
+
+                    // Place ghost placeholder objects
+                    if (countWidth > 1)
+                    {
+                        for (int j=1; j<positions.Length; j++)
+                        {
+                            Vector3Int pos = positions[j];
+                            var placeholderObj = PlaceObject(new GameObject(), pos);
+                            placeholderObj.transform.parent = thisObj.transform;
+                        }
+                    }
+                    if (countHeight > 1)
+                    {
+                        for (int j=0; j<positions.Length; j++)
+                        {
+                            for (int k=1; k<countHeight; k++)
+                            {
+                                Vector3Int basePos = positions[j];
+                                var placeholderObj = PlaceObject(new GameObject(), basePos + new Vector3Int(0, k * cellSize, 0));
+                                placeholderObj.transform.parent = thisObj.transform;
+                            }
+                        }
+                    }
+
+                    // TODO turn to direction
+                
+                    thisObj.transform.parent = blockersParent.transform;
                 }
             }
         }
-
-        private void MakeRandObjBlockers(GameObject[] blockerPrefabs, int amount)
+        // Overloads
+        private void MakeBlockers(GameObject blockerPrefab, Material[] variantMats, int countWidth, int countHeight, int amount)
         {
-            for (int i=0; i<amount; i++)
-            {
-                // Choose random object
-                GameObject obj = blockerPrefabs[Random.Range(0, blockerPrefabs.Length)];
-
-                // Choose random position on ground
-                Vector3 pos = FindPositionOnGround();
-                if (pos == Vector3.zero) return; // No more room for blocks
-
-                // Place in grid
-                Grid.GetGridPosition(pos, out Vector3Int gridPos);
-                var thisObj = PlaceObject(obj, gridPos);
-                if (thisObj != null)
-                {
-                    blockerGameObjects.Add(thisObj); // Keep track of them
-                    thisObj.transform.parent = blockersParent;
-                }
-            }
+            MakeBlockers(new GameObject[] {blockerPrefab}, variantMats, countWidth, countHeight, amount);
+        }
+        private void MakeBlockers(GameObject blockerPrefab, int countWidth, int countHeight, int amount)
+        {
+            MakeBlockers(new GameObject[] {blockerPrefab}, new Material[]{}, countWidth, countHeight, amount);
+        }
+        private void MakeBlockers(GameObject[] blockerPrefabs, int countWidth, int countHeight, int amount)
+        {
+            MakeBlockers(blockerPrefabs, new Material[]{}, countWidth, countHeight, amount);
         }
 
-        private Vector3 FindPositionOnGround()
+        // Checks if a line of blocks will fit
+        private bool ValidateGridSegments(int countWidth, out Vector3Int[] positions, out Vector3 direction)
         {
+            Debug.Log("validate grid segments");
+            positions = new Vector3Int[countWidth];
+            Vector3[] directions = new Vector3[]{Vector3.right, Vector3.left, Vector3.up, Vector3.down};
+            direction = Vector3.zero;
             int MAX_ATTEMPTS = width * height * depth;
             int currAttempts = 0;
-            while(true)
-            {
-                currAttempts++;
+            while (true)
+            {   
+                // Randomly choose an initial grid position
                 int x = Random.Range(1, width-1);
                 int y = 1;
                 int z = Random.Range(1, depth-1);
-                if (!grid.GetValue(x, y, z).isOccupied) return new Vector3(x, y, z);
-
+                Debug.Log($"Initial pos {x} {y} {z}");
+                // Check which orientation it should be in
+                
+                Vector3Int[] temp = new Vector3Int[countWidth];
+                foreach (Vector3 gridDir in directions)
+                {
+                    direction = gridDir;
+                    for (int i=0; i<countWidth; i++)
+                    {
+                        Debug.Log($"segment #{i}");
+                        Vector3Int gridPos = Vector3Int.FloorToInt(new Vector3(x, y, z) + (gridDir * i));
+                        if (grid.GetValue(gridPos.x, gridPos.y, gridPos.z).isOccupied) continue; // Abort this direction if you run into an occupied position
+                        else temp[i] = gridPos;
+                    }
+                    // All segments fit here
+                    positions = temp;
+                    return true;
+                }
+                currAttempts++;
                 // Protect against infinite loops
-                if (currAttempts >= MAX_ATTEMPTS) return Vector3.zero;
+                if (currAttempts >= MAX_ATTEMPTS) return false;
             }
+            
         }
 
         void DrawGrid()
@@ -313,8 +243,6 @@ namespace Hmlca.Untitled
                         Debug.DrawLine(worldPos, worldPos + Vector3.right * 0.1f, color, float.PositiveInfinity);
                         Debug.DrawLine(worldPos, worldPos + Vector3.up * 0.1f, color, float.PositiveInfinity);
                         Debug.DrawLine(worldPos, worldPos + Vector3.forward * 0.1f, color, float.PositiveInfinity);
-
-                        // PlaceObject(worldPos, gridPrefab);
                     }
                 }
             }
@@ -330,7 +258,6 @@ namespace Hmlca.Untitled
                 y = pos.y;
                 z = pos.z;
                 var worldPosition = grid.GetWorldPosition(x, y, z);
-                Debug.Log(obj.name + " " + worldPosition);
 
                 GridNode node = grid.GetValue(x, y, z);
                 if (node == null)
