@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +9,7 @@ namespace Hmlca.Untitled
     {
         
         public int width = 5, depth = 5;
-        private int height = 3;
+        private int height = 4;
         private float cellSize = 1f;
         public GameObject groundPrefab;
         public Material sidewalkMat;
@@ -103,16 +102,16 @@ namespace Hmlca.Untitled
             
             // Make blockers
             // 1x1 blockers
-            MakeBlockers(blockerPrefabs_1x1, 1, num1x1Blockers);
+            MakeBlockers(blockerPrefabs_1x1, 1, 1, num1x1Blockers);
 
             // 2x1 blockers
-            MakeBlockers(blockerPrefab_2x1, 2, num2x1Blockers);
+            MakeBlockers(blockerPrefab_2x1, 2, 1, num2x1Blockers);
 
             // 1x2 blockers
-            MakeBlockers(blockerPrefab_1x2, buildingMats, 1, num1x2Blockers);
+            MakeBlockers(blockerPrefab_1x2, buildingMats, 1, 2, num1x2Blockers);
 
             // 1x3 blockers
-            MakeBlockers(blockerPrefab_1x3, buildingMats, 1, num1x1Blockers);
+            MakeBlockers(blockerPrefab_1x3, buildingMats, 1, 3, num1x1Blockers);
         }
         
 
@@ -120,20 +119,25 @@ namespace Hmlca.Untitled
         {
             for (int i=0; i<amount; i++)
             {
-                Debug.Log(i);
                 // Choose random object
                 GameObject obj = blockerPrefabs[Random.Range(0, blockerPrefabs.Length)];
-                Debug.Log(obj.name);
 
                 // Choose random position on ground
                 if (!ValidateGridSegments(countWidth, out Vector3Int[] positions, out Vector3 direction)) return;
 
                 // Place real position in grid
                 Grid.GetGridPosition(positions[0], out Vector3Int gridPos);
+                Debug.Log($"{obj.name} will be at {gridPos} facing {direction}");
                 var thisObj = PlaceObject(obj, gridPos);
-                if (thisObj == null) return;
+                print($"var thisObj {thisObj == null}");
+                if (thisObj == null) 
+                {
+                    print("placeobject is null");
+                    return;
+                }
                 else
                 {
+                    print("we got it on lock");
                     // Apply randomized materials if applicable
                     if (variantMats.Length > 0)
                     {
@@ -144,8 +148,10 @@ namespace Hmlca.Untitled
                     thisObj.transform.parent = blockersParent;
 
                     // Place ghost placeholder objects
+                    Debug.Log("time for ghost placeholders");
                     if (countWidth > 1)
                     {
+                        Debug.Log("width");
                         for (int j=1; j<positions.Length; j++)
                         {
                             Vector3Int pos = positions[j];
@@ -155,18 +161,23 @@ namespace Hmlca.Untitled
                     }
                     if (countHeight > 1)
                     {
+                        Debug.Log("height");
                         for (int j=0; j<positions.Length; j++)
                         {
-                            for (int k=1; k<countHeight; k++)
+                            for (int k=2; k<=countHeight; k++)
                             {
-                                Vector3Int basePos = positions[j];
-                                var placeholderObj = PlaceObject(new GameObject(), basePos + new Vector3Int(0, k * cellSize, 0));
+                                Vector3Int pos = new Vector3Int(positions[j].x, k, positions[j].z);
+                                var placeholderObj = PlaceObject(new GameObject(), pos);
                                 placeholderObj.transform.parent = thisObj.transform;
                             }
                         }
                     }
 
-                    // TODO turn to direction
+                    // Turn mesh in direction
+                    if (direction == Vector3.up) thisObj.transform.Rotate(Vector3.up, -90);
+                    else if (direction == Vector3.down) thisObj.transform.Rotate(Vector3.up, 90);
+                    else if (direction == Vector3.left) thisObj.transform.Rotate(Vector3.up, 180);
+                    // Else don't turn
                 
                     thisObj.transform.parent = blockersParent.transform;
                 }
@@ -189,7 +200,6 @@ namespace Hmlca.Untitled
         // Checks if a line of blocks will fit
         private bool ValidateGridSegments(int countWidth, out Vector3Int[] positions, out Vector3 direction)
         {
-            Debug.Log("validate grid segments");
             positions = new Vector3Int[countWidth];
             Vector3[] directions = new Vector3[]{Vector3.right, Vector3.left, Vector3.up, Vector3.down};
             direction = Vector3.zero;
@@ -201,27 +211,37 @@ namespace Hmlca.Untitled
                 int x = Random.Range(1, width-1);
                 int y = 1;
                 int z = Random.Range(1, depth-1);
-                Debug.Log($"Initial pos {x} {y} {z}");
+
                 // Check which orientation it should be in
-                
                 Vector3Int[] temp = new Vector3Int[countWidth];
-                foreach (Vector3 gridDir in directions)
+                if (countWidth > 1)
                 {
-                    direction = gridDir;
-                    for (int i=0; i<countWidth; i++)
+                    foreach (Vector3 gridDir in directions)
                     {
-                        Debug.Log($"segment #{i}");
-                        Vector3Int gridPos = Vector3Int.FloorToInt(new Vector3(x, y, z) + (gridDir * i));
-                        if (grid.GetValue(gridPos.x, gridPos.y, gridPos.z).isOccupied) continue; // Abort this direction if you run into an occupied position
-                        else temp[i] = gridPos;
+                        direction = gridDir;
+                        for (int i=0; i<countWidth; i++)
+                        {
+                            Vector3Int gridPos = Vector3Int.FloorToInt(new Vector3(x, y, z) + (gridDir * i));
+                            if (IsPosOccupied(gridPos.x, gridPos.y, gridPos.z)) continue; // Abort this direction if you run into an occupied position
+                            else temp[i] = gridPos;
+                        }
+                        // All segments fit here
+                        positions = temp;
+                        print("epic. returning");
+                        return true;
                     }
-                    // All segments fit here
-                    positions = temp;
-                    return true;
                 }
+                else
+                {
+                    Vector3Int gridPos = Vector3Int.FloorToInt(new Vector3(x, y, z));
+                    positions[0] = gridPos;
+                    if (IsPosOccupied(gridPos.x, gridPos.y, gridPos.z)) continue;
+                    else direction = directions[Random.Range(0, directions.Length)]; return true;
+                }
+                    
                 currAttempts++;
                 // Protect against infinite loops
-                if (currAttempts >= MAX_ATTEMPTS) return false;
+                if (currAttempts >= MAX_ATTEMPTS) print("im giving up i guess"); return false;
             }
             
         }
@@ -259,11 +279,10 @@ namespace Hmlca.Untitled
                 z = pos.z;
                 var worldPosition = grid.GetWorldPosition(x, y, z);
 
-                GridNode node = grid.GetValue(x, y, z);
-                if (node == null)
-                    print("node null?");
-                if (node != null && !node.isOccupied)
+                // print($"node {node} is occupied?: {node.isOccupied}");
+                if (!IsPosOccupied(x, y, z))
                 {
+                    GridNode node = grid.GetValue(x, y, z);
                     node.isOccupied = true;
                     GameObject thisObj = Instantiate(obj, worldPosition, Quaternion.identity);
 
@@ -283,7 +302,6 @@ namespace Hmlca.Untitled
                 }
                 else
                 {
-                    Debug.Log("Cell is already occupied!");
                     return null;
                 }
             }
@@ -296,6 +314,12 @@ namespace Hmlca.Untitled
             float y = cellSize; // Center will be on ground
             float z = depth * cellSize / 2;
             return new Vector3(x, y, z);
+        }
+
+        private bool IsPosOccupied(int x, int y, int z)
+        {
+            GridNode node = grid.GetValue(x, y, z);
+            return node.isOccupied;
         }
     }
 }
