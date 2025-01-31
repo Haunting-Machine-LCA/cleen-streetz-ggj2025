@@ -33,7 +33,7 @@ namespace Hmlca.Untitled
             if (closeCam == null) Debug.LogError("Missing close virtual camera!");
             brain = gameObject.GetComponent<CinemachineBrain>();
             UseCloseCam(); // Close cam by default
-            SetCameraDirection(CameraDirection.NORTH); // Default direction
+            SetCameraDirection(camDir); // Default direction
         }
 
         void Update()

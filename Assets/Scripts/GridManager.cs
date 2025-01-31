@@ -23,11 +23,17 @@ namespace Hmlca.Untitled
         public GameObject blockerPrefab_1x2;
         public int num1x3Blockers = 3;
         public GameObject blockerPrefab_1x3;
+        public GameObject targetGroupObj;
         private Transform gridPiecesParent;
         private Transform groundParent;
         private Transform blockersParent;
         private Grid<GridNode> grid;
         private List<GameObject> blockerGameObjects = new List<GameObject>();
+
+        public void SetTargets()
+        {
+            targetGroupObj.GetComponent<GridTargetGroup>().SetTargets(blockerGameObjects);
+        }
 
 
         public Grid<GridNode> Grid => grid;
@@ -74,6 +80,8 @@ namespace Hmlca.Untitled
         {   
             PopulateGrid();
             DrawGrid();
+
+            // SetTargets();
         }
 
     
@@ -127,7 +135,7 @@ namespace Hmlca.Untitled
 
                 // Place real position in grid
                 Grid.GetGridPosition(positions[0], out Vector3Int gridPos);
-                Debug.Log($"{obj.name} will be at {gridPos} facing {direction}");
+                // Debug.Log($"{obj.name} will be at {gridPos} facing {direction}");
                 var thisObj = PlaceObject(obj, gridPos);
                 print($"var thisObj {thisObj == null}");
                 if (thisObj == null) 
@@ -148,10 +156,10 @@ namespace Hmlca.Untitled
                     thisObj.transform.parent = blockersParent;
 
                     // Place ghost placeholder objects
-                    Debug.Log("time for ghost placeholders");
+                    // Debug.Log("time for ghost placeholders");
                     if (countWidth > 1)
                     {
-                        Debug.Log("width");
+                        // Debug.Log("width");
                         for (int j=1; j<positions.Length; j++)
                         {
                             Vector3Int pos = positions[j];
@@ -161,7 +169,7 @@ namespace Hmlca.Untitled
                     }
                     if (countHeight > 1)
                     {
-                        Debug.Log("height");
+                        // Debug.Log("height");
                         for (int j=0; j<positions.Length; j++)
                         {
                             for (int k=2; k<=countHeight; k++)

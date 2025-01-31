@@ -11,15 +11,16 @@ namespace Hmlca.Untitled
         // Start is called before the first frame update
         void Start()
         {
-            group = GetComponent<CinemachineTargetGroup>();
-            var gridManager = GridManager.GetSingleton();
-            
+            GridManager.GetSingleton().targetGroupObj = this.gameObject;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void SetTargets(List<GameObject> objs)
         {
-        
+            var tg = GetComponent<CinemachineTargetGroup>();
+            foreach (GameObject obj in objs)
+            {
+                tg.AddMember(obj.transform, 1.0f, 1.0f);
+            }
         }
     }
 }
