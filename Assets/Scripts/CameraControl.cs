@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Cinemachine;
 using System.Net.Sockets;
 using PlasticGui.Help.Actions;
+using Codice.Client.Common.GameUI;
 
 namespace Hmlca.Untitled
 {
@@ -46,6 +47,10 @@ namespace Hmlca.Untitled
             if (Input.GetMouseButtonUp(0) && overviewing)
             {
                 UseCloseCam();
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                closeCam.m_XAxis.Value += 90;
             }
         }
 

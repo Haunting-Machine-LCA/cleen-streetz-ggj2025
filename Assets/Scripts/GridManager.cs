@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,12 +29,13 @@ namespace Hmlca.Untitled
         private Transform groundParent;
         private Transform blockersParent;
         private Grid<GridNode> grid;
-        private List<GameObject> blockerGameObjects = new List<GameObject>();
+        private CinemachineTargetGroup targetGroup;
 
-        public void SetTargets()
-        {
-            targetGroupObj.GetComponent<GridTargetGroup>().SetTargets(blockerGameObjects);
-        }
+        // public void SetTargets()
+        // {
+        //     targetGroupObj.GetComponent<GridTargetGroup>().SetTargets(blockerGameObjects);
+        // }
+
 
 
         public Grid<GridNode> Grid => grid;
@@ -72,6 +74,7 @@ namespace Hmlca.Untitled
             gridPiecesParent = transform.Find("GridPieces");
             groundParent = gridPiecesParent.Find("Ground");
             blockersParent = gridPiecesParent.Find("Blockers");
+            targetGroup = GameObject.Find("GridTargetGroup").gameObject.GetComponent<CinemachineTargetGroup>();
         }
 
 
@@ -104,6 +107,7 @@ namespace Hmlca.Untitled
                     }
                     
                     var thisObj = PlaceObject(groundPrefab, Vector3Int.FloorToInt(worldPos));
+                    targetGroup.AddMember(thisObj.transform, 1, 1);
                     thisObj.transform.parent = groundParent;
                 }
             }
@@ -152,7 +156,6 @@ namespace Hmlca.Untitled
                         Material mat = variantMats[Random.Range(0, variantMats.Length)];
                         thisObj.transform.Find("Main").GetComponent<Renderer>().material = mat;
                     }
-                    blockerGameObjects.Add(thisObj); // Keep track of them
                     thisObj.transform.parent = blockersParent;
 
                     // Place ghost placeholder objects

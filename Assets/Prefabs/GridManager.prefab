@@ -103,6 +103,7 @@ MonoBehaviour:
   num1x3Blockers: 5
   blockerPrefab_1x3: {fileID: 4108399945309365678, guid: 6bf93c2130b5424419e624d0850c05a7,
     type: 3}
+  targetGroupObj: {fileID: 0}
 --- !u!1 &7804278191170131053
 GameObject:
   m_ObjectHideFlags: 0
