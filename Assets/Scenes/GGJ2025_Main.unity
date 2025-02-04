@@ -1151,10 +1151,20 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 7752067682932630801, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: m_XAxis.m_MaxValue
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8889922621048837692, guid: 868778f971f68ce43ae23cea3e5e12ed,
         type: 3}
       propertyPath: m_BindingMode
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889922621048837692, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: m_PitchDamping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8889922621048837692, guid: 868778f971f68ce43ae23cea3e5e12ed,
         type: 3}
