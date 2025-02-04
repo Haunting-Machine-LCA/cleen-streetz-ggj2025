@@ -17,7 +17,7 @@ namespace Hmlca.Untitled
         public int maxAp = 3;
         public int baseDamage = 10;
         [SerializeField] private GridEntity entity;
-        [SerializeField] private CharacterAnimations animator;
+        [SerializeField] private PlayerAnimations animator;
         [SerializeField] private float chargeTimeSeconds;
         private float charge;
         private Coroutine attackRoutine;

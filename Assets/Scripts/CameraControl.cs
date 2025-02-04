@@ -34,6 +34,7 @@ namespace Hmlca.Untitled
             if (closeCam == null) Debug.LogError("Missing close virtual camera!");
             brain = gameObject.GetComponent<CinemachineBrain>();
             UseCloseCam(); // Close cam by default
+            // UseOverviewCam();
             SetCameraDirection(camDir); // Default direction
         }
 
@@ -48,10 +49,11 @@ namespace Hmlca.Untitled
             {
                 UseCloseCam();
             }
-            if (Input.GetMouseButtonUp(1))
-            {
-                closeCam.m_XAxis.Value += 90;
-            }
+            // if (Input.GetMouseButtonUp(1))
+            // {
+            //     closeCam.m_XAxis.Value += 90;
+            //     overviewCam.GetComponent<CinemachineOrbitalTransposer>().m_Heading.m_Bias += 90;
+            // }
         }
 
         public Transform GetFollowTarget() {

@@ -144,12 +144,12 @@ namespace Hmlca.Untitled
                 print($"var thisObj {thisObj == null}");
                 if (thisObj == null) 
                 {
-                    print("placeobject is null");
+                    // print("placeobject is null");
                     return;
                 }
                 else
                 {
-                    print("we got it on lock");
+                    // print("we got it on lock");
                     // Apply randomized materials if applicable
                     if (variantMats.Length > 0)
                     {
@@ -167,7 +167,7 @@ namespace Hmlca.Untitled
                         {
                             Vector3Int pos = positions[j];
                             var placeholderObj = PlaceObject(new GameObject(), pos);
-                            placeholderObj.transform.parent = thisObj.transform;
+                            if (placeholderObj != null) placeholderObj.transform.parent = thisObj.transform;
                         }
                     }
                     if (countHeight > 1)
@@ -179,7 +179,7 @@ namespace Hmlca.Untitled
                             {
                                 Vector3Int pos = new Vector3Int(positions[j].x, k, positions[j].z);
                                 var placeholderObj = PlaceObject(new GameObject(), pos);
-                                placeholderObj.transform.parent = thisObj.transform;
+                                if (placeholderObj != null) placeholderObj.transform.parent = thisObj.transform;
                             }
                         }
                     }

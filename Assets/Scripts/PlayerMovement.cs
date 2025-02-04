@@ -16,7 +16,7 @@ namespace Hmlca.Untitled
 
         [SerializeField] private GridEntity entity;
         [SerializeField] private GridMover mover;
-        [SerializeField] private CharacterAnimations animator;
+        [SerializeField] private PlayerAnimations animator;
         private Coroutine moveRoutine;
 
 
@@ -28,7 +28,7 @@ namespace Hmlca.Untitled
             if (!mover)
                 mover = GetComponent<GridMover>();
             if (!animator)
-                animator = GetComponent<CharacterAnimations>();
+                animator = GetComponent<PlayerAnimations>();
         }
 
 
@@ -36,13 +36,25 @@ namespace Hmlca.Untitled
         {
             Vector3Int dir = Vector3Int.zero;
             if (Input.GetKeyDown(MOVE_UP))
+            {
                 dir = new Vector3Int(0, 0, 1);
+                animator.StartRunningAnim(2);
+            }
             else if (Input.GetKeyDown(MOVE_DOWN))
+            {
                 dir = new Vector3Int(0, 0, -1);
+                animator.StartRunningAnim(3);
+            }
             else if (Input.GetKeyDown(MOVE_LEFT))
+            {
                 dir = new Vector3Int(-1, 0, 0);
+                animator.StartRunningAnim(1);
+            }
             else if (Input.GetKeyDown(MOVE_RIGHT))
+            {
                 dir = new Vector3Int(1, 0, 0);
+                animator.StartRunningAnim(0);
+            }
             if (dir != Vector3Int.zero)
             {
                 if (mover.TryMove(dir))
@@ -58,7 +70,7 @@ namespace Hmlca.Untitled
                             )
                         )
                     );
-                    animator.StartRunningAnim();
+                    
                 }
             }
         }
