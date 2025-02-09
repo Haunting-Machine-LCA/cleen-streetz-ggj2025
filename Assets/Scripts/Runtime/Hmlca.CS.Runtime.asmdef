@@ -1,0 +1,17 @@
+{
+    "name": "Hmlca.CS.Runtime",
+    "rootNamespace": "Hmlca.CS",
+    "references": [
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:d062e1f4d97a89849bb7087b47e7b4e7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
