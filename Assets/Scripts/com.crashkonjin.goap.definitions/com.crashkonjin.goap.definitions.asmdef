@@ -1,10 +1,11 @@
 {
-    "name": "Hmlca.CS.Runtime",
-    "rootNamespace": "Hmlca.CS",
+    "name": "com.crashkonjin.goap.definitions",
+    "rootNamespace": "CrashKonjin.Goap.Definitions",
     "references": [
-        "GUID:4307f53044263cf4b835bd812fc161a4",
-        "GUID:25a0ea5f14949ed4db95b15ca1a168da",
-        "GUID:d062e1f4d97a89849bb7087b47e7b4e7"
+        "GUID:0d347051544a4880a72466503e27985a",
+        "GUID:4d9088d80ac84f52b9b07421f95af69c",
+        "GUID:1492f7fc38ce464dae5c20df05fd22e3",
+        "GUID:6eb7f39de256eea4bb8708df2c32e1ba"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

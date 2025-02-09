@@ -39,7 +39,11 @@ MonoBehaviour:
     validateConditions: 1
     moveMode: 0
     conditions: []
-    effects: []
+    effects:
+    - worldKey:
+        <Name>k__BackingField: 
+        <Id>k__BackingField: 
+      effect: 0
   worldSensors:
   - sensor:
       <Name>k__BackingField: 
