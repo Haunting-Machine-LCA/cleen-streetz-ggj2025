@@ -2,7 +2,7 @@ using Hmlca.CS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Hmlca.CS.TurnSystem;
+using static Hmlca.CS.World.Battles.TurnSystem;
 
 namespace Hmlca.CS
 {

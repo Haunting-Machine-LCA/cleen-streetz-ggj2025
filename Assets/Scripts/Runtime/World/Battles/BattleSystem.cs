@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static Hmlca.CS.TurnSystem;
+using Hmlca.CS.App;
+using Hmlca.CS.Inputs;
+using static Hmlca.CS.World.Battles.TurnSystem;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World.Battles
 {
     public class BattleSystem : Singleton<BattleSystem>
     {

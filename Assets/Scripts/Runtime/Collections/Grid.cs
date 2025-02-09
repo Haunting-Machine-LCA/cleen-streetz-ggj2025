@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 // Class that defines a grid
-namespace Hmlca.CS
+namespace Hmlca.CS.Collections
 {
     public class Grid<TGridObject>
     {

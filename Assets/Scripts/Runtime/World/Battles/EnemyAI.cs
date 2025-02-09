@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Hmlca.CS
+namespace Hmlca.CS.World.Battles
 {
     [RequireComponent(typeof(GridEntity))]
     public class EnemyAI : MonoBehaviour

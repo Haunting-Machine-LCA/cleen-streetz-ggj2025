@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace Hmlca.CS
+namespace Hmlca.CS.App
 {
     public class SceneTransition : MonoBehaviour
     {

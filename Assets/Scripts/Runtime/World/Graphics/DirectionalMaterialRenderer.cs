@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Hmlca.CS
+namespace Hmlca.CS.World.Graphics
 {
 #if UNITY_EDITOR
     [ExecuteInEditMode]

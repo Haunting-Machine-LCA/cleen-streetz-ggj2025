@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hmlca.CS.App;
 
-namespace Hmlca.CS
+namespace Hmlca.CS.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Hmlca.CS.App;
+using Hmlca.CS.World.Battles;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World.Players
 {
     [RequireComponent(typeof(Player))]
     public class PlayerAttack : Singleton<PlayerAttack>

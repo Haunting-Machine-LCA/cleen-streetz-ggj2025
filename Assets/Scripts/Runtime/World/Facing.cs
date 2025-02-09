@@ -4,7 +4,7 @@ using UnityEngine;
 using TinyTween;
 
 
-namespace Hmlca.CS
+namespace Hmlca.CS.World
 {
 #if UNITY_EDITOR
     [ExecuteInEditMode]

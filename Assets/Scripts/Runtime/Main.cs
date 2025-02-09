@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Hmlca.CS
+namespace Hmlca.CS.App
 {
     public class Main : Singleton<Main>
     {

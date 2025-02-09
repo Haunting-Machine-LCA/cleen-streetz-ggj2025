@@ -5,7 +5,7 @@ using UnityEngine;
 using Optional;
 
 
-namespace Hmlca.CS
+namespace Hmlca.CS.App
 {
     public class Singleton : MonoBehaviour
     {

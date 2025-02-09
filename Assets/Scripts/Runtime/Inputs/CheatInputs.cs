@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hmlca.CS.World.Battles;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World.Players
 {
     public class CheatInputs : MonoBehaviour
     {

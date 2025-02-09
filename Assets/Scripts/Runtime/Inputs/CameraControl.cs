@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
-using System.Runtime.CompilerServices;
 using Cinemachine;
-using System.Net.Sockets;
-using PlasticGui.Help.Actions;
-using Codice.Client.Common.GameUI;
+using Hmlca.CS.App;
 
-namespace Hmlca.CS
+namespace Hmlca.CS.Inputs
 {
     public class CameraControl : Singleton<CameraControl>
     {

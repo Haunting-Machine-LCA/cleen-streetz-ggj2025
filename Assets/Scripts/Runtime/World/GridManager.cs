@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Hmlca.CS.App;
+using Hmlca.CS.Collections;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World
 {
     public class GridManager : Singleton<GridManager>
     {

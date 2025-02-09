@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Hmlca.CS.World.Battles;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World
 {
     [RequireComponent(typeof(CharacterAnimations))]
     public class CharacterHp : MonoBehaviour

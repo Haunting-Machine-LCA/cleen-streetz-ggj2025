@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World
 {
     public class GridTargetGroup : MonoBehaviour
     {

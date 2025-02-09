@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Hmlca.CS.App;
+using Hmlca.CS.World.Players;
 
-namespace Hmlca.CS
+
+namespace Hmlca.CS.World.Battles
 {
     // State machine of the current battle
     public class TurnSystem : Singleton<TurnSystem>
