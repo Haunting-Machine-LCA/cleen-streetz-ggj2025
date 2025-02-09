@@ -77,7 +77,7 @@ namespace Hmlca.CS.World
             gridPiecesParent = transform.Find("GridPieces");
             groundParent = gridPiecesParent.Find("Ground");
             blockersParent = gridPiecesParent.Find("Blockers");
-            targetGroup = GameObject.Find("GridTargetGroup").gameObject.GetComponent<CinemachineTargetGroup>();
+            targetGroup = FindObjectOfType<CinemachineTargetGroup>();
         }
 
 

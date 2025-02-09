@@ -83,7 +83,6 @@ namespace Hmlca.CS.World.Battles
             if (resetPlayer)
                 ResetPlayer();
             ResetBattleObjects();
-            CameraControl.GetSingleton().FollowAndLookAt(player.transform);
             GoToState(BattleState.COMMAND);
             OnBattleStart?.Invoke();
         }
