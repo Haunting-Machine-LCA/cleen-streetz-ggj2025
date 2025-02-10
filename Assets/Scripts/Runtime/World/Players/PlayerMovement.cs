@@ -53,6 +53,9 @@ namespace Hmlca.CS.World.Players
 
         private void Update()
         {
+            if (moveRoutine != null)
+                return;
+
             // Get move input vector
             Vector3Int dir = Vector3Int.zero;
             if (Input.GetKeyDown(MOVE_UP))
@@ -78,16 +81,19 @@ namespace Hmlca.CS.World.Players
 
         private void LateUpdate()
         {
-            if (desiresToMove)
+            if (desiresToMove && desiredMovement != Vector2.zero)
             {
                 var cdir = cameraRootTransform.forward * desiredMovement.y + cameraRootTransform.right * desiredMovement.x;
+                cdir.Normalize();
                 var dir2 = new Vector2(cdir.x, cdir.z);
-                var dir = new Vector3Int(Mathf.FloorToInt(dir2.x), 0, Mathf.FloorToInt(dir2.y));
+                var dir = new Vector3Int(Mathf.RoundToInt(dir2.x) % 360, 0, Mathf.RoundToInt(dir2.y) % 360);
                 if (mover.TryMove(dir))
                 {
                     // Update absolute movement angle and start running animation
                     dir2 = new Vector2(dir.x, dir.z);
-                    facing.SetFacing(dir2.GetAngle(), true);
+                    var angle = dir2.GetAngle();
+                    print($"Player facing set to {angle}"); //DEBUG
+                    facing.SetFacing(angle, true);
                     animator.StartRunningAnim();
 
                     print($"Player moving {dir}"); //DEBUG
@@ -112,7 +118,7 @@ namespace Hmlca.CS.World.Players
         private void UpdateRotation(float angle)
         {
             var eulerAngles = entity.transform.eulerAngles;
-            eulerAngles.y = cameraRootTransform.eulerAngles.y;
+            eulerAngles.y = (cameraRootTransform.eulerAngles.y - 180f) % 360;
             entity.transform.eulerAngles = eulerAngles;
         }
 
@@ -123,8 +129,10 @@ namespace Hmlca.CS.World.Players
             var turnSystem = TurnSystem.GetSingleton();
             turnSystem.currentTurnRoutine = moveRoutine;
             yield return turnSystem.ExecuteTurn(TurnController.PLAYER);
+            yield return moveRoutine;
             desiredMovement = Vector2.zero;
             animator.StopRunningAnim();
+            moveRoutine = null;
         }
     }
 }

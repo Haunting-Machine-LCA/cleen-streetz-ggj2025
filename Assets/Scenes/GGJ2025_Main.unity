@@ -122,6 +122,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &130959087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 271911541223892800, guid: 868778f971f68ce43ae23cea3e5e12ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 2625231376532112035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02c741e457554b4f9a18bc92a225596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209090640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 948895570390820465, guid: 868778f971f68ce43ae23cea3e5e12ed,
@@ -202,6 +214,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ___ROOT___
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 130959087}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetTurnQueue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hmlca.CS.World.Battles.TurnSystem, Hmlca.CS.Runtime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5122327494569925827, guid: 868778f971f68ce43ae23cea3e5e12ed,
+        type: 3}
+      propertyPath: OnBattleStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5461055430160818816, guid: 868778f971f68ce43ae23cea3e5e12ed,
         type: 3}

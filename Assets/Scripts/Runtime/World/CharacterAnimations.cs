@@ -8,6 +8,7 @@ namespace Hmlca.CS
     [RequireComponent(typeof(Animator), typeof(Facing))]
     public class CharacterAnimations : MonoBehaviour
     {
+        [SerializeField] private bool useFacing;
         [SerializeField] private Animator animator;
         [SerializeField] private Facing facing;
 
@@ -17,7 +18,7 @@ namespace Hmlca.CS
         {
             if (!animator)
                 animator = GetComponent<Animator>();
-            if (!facing)
+            if (useFacing && !facing)
                 facing = GetComponent<Facing>();
         }
 
@@ -50,7 +51,13 @@ namespace Hmlca.CS
 
         private void LateUpdate()
         {
-            animator.SetInteger("runDirection", facing.CameraFacing());
+            if (!useFacing)
+                return;
+            var relFacing = facing.GetCameraRelativeFacing();
+            float relFacingFloat = relFacing * 45f;
+            var dir = relFacingFloat.ToDirection();
+            var runDirection = Mathf.RoundToInt((int) dir / 2f) % 4;
+            animator.SetInteger("runDirection", runDirection);
         }
 
 

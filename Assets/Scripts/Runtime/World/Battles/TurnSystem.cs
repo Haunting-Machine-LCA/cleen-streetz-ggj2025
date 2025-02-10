@@ -83,20 +83,22 @@ namespace Hmlca.CS.World.Battles
             BattleSystem.GetSingleton().GoToState(BattleSystem.BattleState.EXECUTE);
             if (turn == TurnController.ENEMY)
             {
-                EnemyAI.currentTurnPlans.Clear();
+                //EnemyAI.currentTurnPlans.Clear();
                 var enemies = FindObjectsByType<EnemyAI>(
                     FindObjectsInactive.Exclude,
                     FindObjectsSortMode.None
                 );
-                foreach (var enemy in enemies)
-                {
-                    var plan = enemy.ReadyPlan();
-                }
-                while (EnemyAI.currentTurnPlans.Count > 0)
-                {
-                    var plan = EnemyAI.currentTurnPlans.Dequeue();
-                    yield return plan.ExecutePlan();
-                }
+                foreach (var enemy in enemies)                      //DEBUG
+                    yield return new WaitForSecondsRealtime(0.15f); //DEBUG
+                //foreach (var enemy in enemies)
+                //{
+                //    var plan = enemy.ReadyPlan();
+                //}
+                //while (EnemyAI.currentTurnPlans.Count > 0)
+                //{
+                //    var plan = EnemyAI.currentTurnPlans.Dequeue();
+                //    yield return plan.ExecutePlan();
+                //}
 
             }
             else

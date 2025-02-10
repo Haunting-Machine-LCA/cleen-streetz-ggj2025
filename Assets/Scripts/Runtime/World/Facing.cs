@@ -73,15 +73,18 @@ namespace Hmlca.CS.World
         }
 
 
-        public int CameraFacing()
+        public int GetCameraRelativeFacing()
         {
             if (!cameraRootTransform)
                 cameraRootTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
             int slice = (int) FacingDirection;
             int sliceOffsetFromCamera = GetCameraOffset(slice, cameraRootTransform);
             var currentSlice = slice + sliceOffsetFromCamera;
-            if (currentSlice < 0)
-                currentSlice += (int)Direction.Northwest + 1;
+            var sliceLen = (int)Direction.Northwest + 1;
+            while (currentSlice < 0)
+                currentSlice += sliceLen;
+            while (currentSlice >= sliceLen)
+                currentSlice -= sliceLen;
             return currentSlice;
         }
 

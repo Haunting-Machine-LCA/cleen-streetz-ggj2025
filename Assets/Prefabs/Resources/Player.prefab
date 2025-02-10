@@ -372,6 +372,7 @@ MonoBehaviour:
   mover: {fileID: 4296258785291535258}
   facing: {fileID: 0}
   animator: {fileID: 0}
+  desiredMovement: {x: 0, y: 0}
 --- !u!114 &6775811682087419316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a013a5398f5bd424db6ea9e551b9e5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useFacing: 1
   animator: {fileID: 892714244942300713}
   facing: {fileID: 721208159190858142}
 --- !u!114 &721208159190858142
