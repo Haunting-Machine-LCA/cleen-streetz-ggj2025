@@ -4,7 +4,7 @@ using UnityEngine;
 using Hmlca.CS.App;
 
 
-namespace Hmlca.CS.World.Players
+namespace Hmlca.CS.Inputs
 {
     public abstract class PlayerInput<T> : Singleton<T> where T : PlayerInput<T>
     {

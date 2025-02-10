@@ -193,7 +193,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8941191924506938335, guid: 7efb3bbebe9acdf4182cbf32198e9d35, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8149261867173998570, guid: 7efb3bbebe9acdf4182cbf32198e9d35,
@@ -233,7 +234,17 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6775811682087419316}
+    - targetCorrespondingSourceObject: {fileID: 6986595882369876334, guid: 7efb3bbebe9acdf4182cbf32198e9d35,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 721208159190858142}
   m_SourcePrefab: {fileID: 100100000, guid: 7efb3bbebe9acdf4182cbf32198e9d35, type: 3}
+--- !u!95 &892714244942300713 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4919506690214616969, guid: 7efb3bbebe9acdf4182cbf32198e9d35,
+    type: 3}
+  m_PrefabInstance: {fileID: 5198868817749596576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2941774512150862030 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6986595882369876334, guid: 7efb3bbebe9acdf4182cbf32198e9d35,
@@ -309,7 +320,7 @@ MonoBehaviour:
   maxAp: 3
   baseDamage: 10
   entity: {fileID: 6242604049659719376}
-  animator: {fileID: 6775811682087419316}
+  animator: {fileID: 0}
   chargeTimeSeconds: 2
 --- !u!114 &4616539741459606704
 MonoBehaviour:
@@ -359,7 +370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entity: {fileID: 6242604049659719376}
   mover: {fileID: 4296258785291535258}
-  animator: {fileID: 6775811682087419316}
+  facing: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &6775811682087419316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +384,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a013a5398f5bd424db6ea9e551b9e5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 892714244942300713}
+  facing: {fileID: 721208159190858142}
+--- !u!114 &721208159190858142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941774512150862030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519d57a63a2e7c246a5b6aeec783132d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 2941774512150862030}
+  fullTurnSeconds: 1
+  facingAngle: 0
+  sides: 4
 --- !u!4 &4121332251388229194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8149261867173998570, guid: 7efb3bbebe9acdf4182cbf32198e9d35,

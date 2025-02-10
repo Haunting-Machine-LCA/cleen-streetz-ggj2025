@@ -5,12 +5,13 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Hmlca.CS.App;
 using Hmlca.CS.World.Battles;
+using Hmlca.CS.Inputs;
 
 
 namespace Hmlca.CS.World.Players
 {
     [RequireComponent(typeof(Player))]
-    public class PlayerAttack : Singleton<PlayerAttack>
+    public class PlayerAttack : PlayerInput<PlayerAttack>
     {
         public const KeyCode ATTACK = KeyCode.Space;
 

@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1180320034979036829, guid: 249eb6b8287894a4a9ee980e2e09c0b1,
+        type: 3}
+      propertyPath: root
+      value: 
+      objectReference: {fileID: 8202821663307214584}
+    - target: {fileID: 1180320034979036829, guid: 249eb6b8287894a4a9ee980e2e09c0b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3070350235651522099, guid: 249eb6b8287894a4a9ee980e2e09c0b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -63,6 +73,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6827045857487248144, guid: 249eb6b8287894a4a9ee980e2e09c0b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7705201949785591270, guid: 249eb6b8287894a4a9ee980e2e09c0b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -94,13 +114,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b3d2ef03bad844098377c44f956cfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occupiedGridPositions: []
   OnGridPositionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDestroyed:
     m_PersistentCalls:
       m_Calls: []
   speed: 1
   xVelocity: 0
   yVelocity: 0
-  yOffset: 1
+  gm: {fileID: 0}
   gridPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7447321211786111546
 MonoBehaviour:
@@ -114,3 +138,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3075005f9610c4a4896a45e932881675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facingDirection: {x: 0, y: 0}
+  entity: {fileID: 0}

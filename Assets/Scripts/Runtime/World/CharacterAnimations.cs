@@ -1,58 +1,77 @@
+using Hmlca.CS.World;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hmlca.CS
 {
+    [RequireComponent(typeof(Animator), typeof(Facing))]
     public class CharacterAnimations : MonoBehaviour
     {
-        private Animator anim;
+        [SerializeField] private Animator animator;
+        [SerializeField] private Facing facing;
+
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            anim = GetComponent<Animator>();
+            if (!animator)
+                animator = GetComponent<Animator>();
+            if (!facing)
+                facing = GetComponent<Facing>();
         }
 
-        void Update()
+
+        //private void Start()
+        //{
+        //}
+
+
+        //void Update()
+        //{
+        //    //TESTING
+        //     if (Input.GetKeyDown(KeyCode.Q))
+        //    {
+        //        StartRunningAnim();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.W))
+        //    {
+        //        StopRunningAnim();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        AttackAnim();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.R))
+        //    {
+        //        DamagedAnim();
+        //    }
+        //}
+
+        private void LateUpdate()
         {
-            // TESTING
-            // if (Input.GetKeyDown(KeyCode.Q))
-            // {
-            //     StartRunningAnim();
-            // }
-            // if (Input.GetKeyDown(KeyCode.W))
-            // {
-            //     StopRunningAnim();
-            // }
-            // if (Input.GetKeyDown(KeyCode.E))
-            // {
-            //     AttackAnim();
-            // }
-            // if (Input.GetKeyDown(KeyCode.R))
-            // {
-            //     DamagedAnim();
-            // }
+            animator.SetInteger("runDirection", facing.CameraFacing());
         }
+
 
         public void StartRunningAnim()
         {
-            anim.SetBool("isRunning", true);
+            animator.SetBool("isRunning", true);
         }
 
         public void StopRunningAnim()
         {
-            anim.SetBool("isRunning", false);
+            animator.SetBool("isRunning", false);
         }
 
         public void AttackAnim()
         {
-            anim.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
         }
 
         public void DamagedAnim()
         {
-            anim.SetTrigger("Damaged");
+            animator.SetTrigger("Damaged");
         }
     }
 }

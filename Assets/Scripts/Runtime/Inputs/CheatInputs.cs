@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Hmlca.CS.World.Battles;
+using Hmlca.CS.App;
 
 
 namespace Hmlca.CS.World.Players
 {
-    public class CheatInputs : MonoBehaviour
+    public class CheatInputs : Singleton<CheatInputs>
     {
         private const KeyCode CHEAT_RESET_GAME = KeyCode.F2;
         private const KeyCode CHEAT_RESET_BATTLE = KeyCode.F3;

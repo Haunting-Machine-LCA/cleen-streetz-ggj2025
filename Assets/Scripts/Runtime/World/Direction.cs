@@ -21,13 +21,19 @@ namespace Hmlca.CS
 
     public static class DirectionExt
     {
-        public static float ToAngle(this Direction dir) => (int)dir * 45f;
-        public static Direction ToDirection(this float angle)
+        public static float ToAngle(this Direction dir, int directions = (int) Direction.LEN - 1)
         {
+            var degreesPerDirection = 360f / directions;
+            return (int)dir * degreesPerDirection;
+        }
+        public static Direction ToDirection(this float angle, int directions = (int)Direction.LEN - 1)
+        {
+            const int FINAL = (int)Direction.LEN - 1;
             while (angle < 0f)
                 angle += 360f;
-            const float OFFSET = 45f / 2 - float.Epsilon;
-            float direction = (((angle + OFFSET) % 360f) / 360f * (int)Direction.Northwest);
+            var degreesPerDirection = 360f / directions;
+            float offset = degreesPerDirection / 2 - float.Epsilon;
+            float direction = (((angle + offset) % 360f) / 360f * FINAL);
             return direction < 180f ? RoundUpToDirection(direction) : RoundDownToDirection(direction);
         }
         private static Direction RoundUpToDirection(float direction) =>

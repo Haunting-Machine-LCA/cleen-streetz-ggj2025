@@ -16,7 +16,7 @@ namespace Hmlca.CS.World
         {
             if (!root)
             {
-                if (TryGetComponent(out BattleCharacter entityRoot))
+                if (TryGetComponent(out BattleCharacterEntity entityRoot))
                 {
                     root = entityRoot.gameObject;
                 }
